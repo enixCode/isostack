@@ -1,0 +1,48 @@
+{
+  "name": "isostack",
+  "version": "0.1.0",
+  "description": "Isometric infrastructure icons as zero-dependency Web Components and static SVG files.",
+  "keywords": [
+    "isometric",
+    "icons",
+    "infrastructure",
+    "diagram",
+    "svg",
+    "web-components",
+    "custom-elements"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/enixCode/isostack.git"
+  },
+  "homepage": "https://github.com/enixCode/isostack#readme",
+  "bugs": "https://github.com/enixCode/isostack/issues",
+  "private": true,
+  "type": "module",
+  "main": "./index.js",
+  "exports": {
+    ".": "./index.js",
+    "./core/*": "./core/*",
+    "./components/*": "./components/*",
+    "./dist/*": "./dist/*",
+    "./package.json": "./package.json",
+    "./custom-elements.json": "./custom-elements.json"
+  },
+  "files": [
+    "index.js",
+    "core/",
+    "components/",
+    "dist/",
+    "custom-elements.json"
+  ],
+  "customElements": "custom-elements.json",
+  "sideEffects": [
+    "./index.js",
+    "./components/*/iso-*.js"
+  ],
+  "scripts": {
+    "build": "node build.js",
+    "prepack": "node build.js"
+  }
+}

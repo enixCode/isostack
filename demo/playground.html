@@ -1,0 +1,569 @@
+<title>isostack playground</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+  /* Layout: an isometric floor fills the screen and moves under the fingers; the family bar, the
+     view tools and the inspector of the selected element float over it, inside the side gutter. */
+  :root {
+    --bg: #e8ecf2;
+    --floor-line: #d1d8e2;
+    --surface: #ffffff;
+    --ink: #18212d;
+    --muted: #5b6878;
+    --rule: #d5dce6;
+    --accent: #2563eb;
+    --accent-soft: #dfe8fd;
+    --shadow: 0 6px 24px rgb(20 30 50 / .12);
+    /* Status colors of the icons themselves. */
+    --ok: #22c55e; --warn: #f59e0b; --down: #ef4444; --unknown: #94a3b8;
+    --font-ui: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-data: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0f141b; --floor-line: #1d2632; --surface: #171f2a; --ink: #e4e9f0; --muted: #94a2b4;
+      --rule: #283343; --accent: #6b9bff; --accent-soft: #1d2b48; --shadow: 0 6px 24px rgb(0 0 0 / .45);
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0f141b; --floor-line: #1d2632; --surface: #171f2a; --ink: #e4e9f0; --muted: #94a2b4;
+    --rule: #283343; --accent: #6b9bff; --accent-soft: #1d2b48; --shadow: 0 6px 24px rgb(0 0 0 / .45);
+    color-scheme: dark;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    background: var(--bg); color: var(--ink); font: 14px/1.45 var(--font-ui);
+    overflow: hidden; overscroll-behavior: none; -webkit-tap-highlight-color: transparent;
+  }
+  button { font: inherit; color: inherit; touch-action: manipulation; cursor: pointer; }
+  button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  /* The floor and the elements: the same pan and zoom for both, under one transform (see apply()). While
+     the view moves, the world becomes a layer of its own, painted once: moving the view only moves a texture. */
+  #view { position: fixed; inset: 0; overflow: hidden; touch-action: none; user-select: none; -webkit-user-select: none; cursor: grab; }
+  #view.moving { cursor: grabbing; }
+  #world { position: absolute; left: 0; top: 0; transform-origin: 0 0; }
+  #floor { position: absolute; left: -30000px; top: -30000px; width: 60000px; height: 60000px; pointer-events: none; }
+  #floor path { stroke: var(--floor-line); }
+  #layer { position: absolute; left: 0; top: 0; }
+  /* While the view moves (see stir()), the world is promoted and nothing animates, so that no light repaints under it. */
+  #view.busy #world { will-change: transform; }
+  #view.busy #layer { --iso-animation: paused; }
+  /* Each element stands at its own x, z cells on the page grid, which it publishes itself. */
+  #layer > * {
+    position: absolute; left: 0; top: 0; z-index: var(--iso-order);
+    translate: calc(var(--iso-offset-x) - var(--iso-anchor-x)) calc(var(--iso-offset-y) - var(--iso-anchor-y));
+  }
+  [data-selected] { filter: drop-shadow(0 0 7px var(--accent)); }
+
+  #ui {
+    position: fixed; inset: 0; pointer-events: none;
+    display: flex; flex-direction: column; gap: 12px;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    padding-block: calc(12px + env(safe-area-inset-top, 0px)) calc(12px + env(safe-area-inset-bottom, 0px));
+  }
+  #ui button, .inspector { pointer-events: auto; }
+
+  .bar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; }
+  .brand { display: flex; align-items: center; gap: 8px; margin-right: auto; }
+  .brand svg { width: 20px; height: 20px; flex: none; }
+  .mark { font: 600 17px/1 var(--font-data); letter-spacing: -.01em; }
+  .count { color: var(--muted); font-size: 12px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip {
+    padding: 6px 12px; border-radius: 999px; border: 1px solid var(--rule);
+    background: var(--surface); font-size: 13px; font-weight: 500; box-shadow: var(--shadow);
+  }
+  .chip[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+
+  .middle { flex: 1; display: flex; justify-content: flex-end; align-items: center; min-height: 0; }
+  .tools {
+    display: flex; flex-direction: column; overflow: hidden; pointer-events: auto;
+    background: var(--surface); border: 1px solid var(--rule); border-radius: 14px; box-shadow: var(--shadow);
+  }
+  .tools button { width: 52px; height: 44px; border: 0; background: none; font-size: 12px; font-weight: 600; }
+  .tools button.big { font-size: 20px; font-weight: 500; }
+  .tools button + button { border-top: 1px solid var(--rule); }
+  .tools button[aria-pressed="true"] { background: var(--accent-soft); color: var(--accent); }
+
+  .inspector {
+    width: 100%; max-width: 560px; margin-inline: auto; display: grid; gap: 10px;
+    background: var(--surface); border: 1px solid var(--rule); border-radius: 16px; box-shadow: var(--shadow);
+    padding: 12px 14px;
+  }
+  .hint { margin: 0; color: var(--muted); }
+  .head { display: flex; align-items: baseline; gap: 8px; min-width: 0; }
+  .head strong { font-size: 15px; font-weight: 600; white-space: nowrap; }
+  .head .name { font-family: var(--font-data); font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .head .tag { margin-left: auto; color: var(--muted); font: 12px var(--font-data); white-space: nowrap; }
+  .head .close { margin-left: 4px; width: 30px; height: 30px; border: 0; border-radius: 8px; background: none; font-size: 18px; line-height: 1; color: var(--muted); }
+  .statuses { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
+  .statuses button {
+    display: flex; align-items: center; justify-content: center; gap: 5px; height: 36px; min-width: 0; padding: 0 4px;
+    border: 1px solid var(--rule); border-radius: 10px; background: none; font: 500 12.5px var(--font-data);
+  }
+  .statuses i { width: 9px; height: 9px; border-radius: 50%; background: var(--dot); }
+  .statuses button[aria-pressed="true"] { border-color: var(--dot); box-shadow: inset 0 0 0 1px var(--dot); }
+  .sizes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+  .size { display: grid; grid-template-columns: 28px minmax(0, 1fr) 28px; align-items: center; border: 1px solid var(--rule); border-radius: 10px; padding: 3px; }
+  .size button { height: 32px; border: 0; border-radius: 7px; background: var(--accent-soft); color: var(--accent); font-size: 17px; line-height: 1; }
+  .size button:disabled { background: none; color: var(--rule); cursor: default; }
+  .size output { text-align: center; font: 500 13px var(--font-data); font-variant-numeric: tabular-nums; }
+  .size output small { display: block; color: var(--muted); font-size: 10px; }
+  .actions { display: flex; align-items: center; gap: 10px; }
+  .actions button { flex: none; height: 32px; padding: 0 12px; border: 1px solid var(--rule); border-radius: 9px; background: none; font-weight: 500; }
+  .actions button[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+  .actions .hint { min-width: 0; font-size: 12px; line-height: 1.35; }
+  .log { margin: 0; min-height: 1.4em; color: var(--muted); font: 11.5px/1.4 var(--font-data); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .log.error { color: var(--down); white-space: normal; }
+</style>
+
+<main id="view">
+  <div id="world">
+    <svg id="floor" viewBox="-30000 -30000 60000 60000" aria-hidden="true">
+      <defs>
+        <!-- Isometric floor: one cell is 40 units on the ground. -->
+        <pattern id="grid" width="69.28" height="40" patternUnits="userSpaceOnUse">
+          <path d="M0 0L69.28 40M69.28 0L0 40" stroke-width=".8"/>
+        </pattern>
+      </defs>
+      <rect x="-30000" y="-30000" width="60000" height="60000" fill="url(#grid)"/>
+    </svg>
+    <div id="layer">
+      <!-- Compute and containers: boxes in boxes; open them to see inside. -->
+      <iso-server data-group="compute" label="srv-01"></iso-server>
+      <iso-docker data-group="compute" label="registry"></iso-docker>
+      <iso-vps data-group="compute" width="10" depth="7" height="4" label="vps-01">
+        <iso-docker x="1" z="1" width="8" depth="5" height="3" label="stack">
+          <iso-app x="1" z="1.5" label="web"></iso-app>
+          <iso-app x="4.5" z="1.5" label="api" status="warn"></iso-app>
+        </iso-docker>
+      </iso-vps>
+      <iso-vm data-group="compute" width="6" depth="5" label="vm-01">
+        <iso-app x="2" z="1.5" label="worker"></iso-app>
+      </iso-vm>
+      <iso-rack data-group="compute" width="5" depth="5" height="7" label="rack-a">
+        <iso-server x=".5" y=".3" z=".5" width="4" depth="4" label="db-01"></iso-server>
+        <iso-server x=".5" y="3.1" z=".5" width="4" depth="4" status="down" label="db-02"></iso-server>
+      </iso-rack>
+      <!-- Network. -->
+      <iso-cloud data-group="network" label="internet"></iso-cloud>
+      <iso-dns data-group="network" label="dns"></iso-dns>
+      <iso-firewall data-group="network" label="fw-01"></iso-firewall>
+      <iso-router data-group="network" label="gw-01"></iso-router>
+      <iso-load-balancer data-group="network" label="lb-01"></iso-load-balancer>
+      <iso-switch data-group="network" label="sw-01"></iso-switch>
+      <!-- Data and storage. -->
+      <iso-db data-group="data" label="pg"></iso-db>
+      <iso-cache data-group="data" label="cache"></iso-cache>
+      <iso-queue data-group="data" label="jobs"></iso-queue>
+      <iso-bucket data-group="data" label="assets"></iso-bucket>
+      <iso-storage data-group="data" label="nas"></iso-storage>
+      <!-- People and devices, with a Raspberry Pi alone and a cluster of four. -->
+      <iso-user data-group="devices" label="alice"></iso-user>
+      <iso-laptop data-group="devices" label="laptop"></iso-laptop>
+      <iso-phone data-group="devices"></iso-phone>
+      <iso-desktop data-group="devices" label="desk"></iso-desktop>
+      <iso-raspberry-pi data-group="devices" label="pi-01"></iso-raspberry-pi>
+      <iso-raspberry-pi data-group="devices" height="2" label="cluster"></iso-raspberry-pi>
+    </div>
+  </div>
+</main>
+
+<div id="ui">
+  <header class="bar">
+    <div class="brand">
+      <svg viewBox="0 0 20 20" aria-hidden="true">
+        <path d="M10 2L17 6L10 10L3 6Z" fill="#60a5fa"/><path d="M3 6L10 10V18L3 14Z" fill="#3b82f6"/><path d="M17 6L10 10V18L17 14Z" fill="#1d4ed8"/>
+      </svg>
+      <span class="mark">isostack</span>
+      <span class="count" id="count">22 components</span>
+    </div>
+    <nav class="chips" aria-label="Families">
+      <button class="chip" data-group="" aria-pressed="true">All</button>
+      <button class="chip" data-group="compute" aria-pressed="false">Compute</button>
+      <button class="chip" data-group="network" aria-pressed="false">Network</button>
+      <button class="chip" data-group="data" aria-pressed="false">Data</button>
+      <button class="chip" data-group="devices" aria-pressed="false">Devices</button>
+    </nav>
+  </header>
+
+  <div class="middle">
+    <div class="tools" role="toolbar" aria-label="View">
+      <button class="big" id="zoom-in" aria-label="Zoom in">+</button>
+      <button class="big" id="zoom-out" aria-label="Zoom out">−</button>
+      <button id="fit" aria-label="Frame the family">Fit</button>
+      <button id="open-all" aria-pressed="false" aria-label="Open every container">Open</button>
+      <button id="live" aria-pressed="false" aria-label="Simulate live statuses">Live</button>
+    </div>
+  </div>
+
+  <section class="inspector" aria-live="polite">
+    <p class="hint" id="empty">Tap an element to inspect it. Drag to move around, pinch to zoom. Open shows what the containers hold.</p>
+    <div id="details" hidden>
+      <div class="head">
+        <strong id="title">Server</strong>
+        <span class="name" id="name">srv-01</span>
+        <span class="tag" id="tag">&lt;iso-server&gt;</span>
+        <button class="close" id="close" aria-label="Deselect">×</button>
+      </div>
+      <div class="statuses" role="group" aria-label="Status">
+        <button data-status="ok" style="--dot: var(--ok)"><i></i>ok</button>
+        <button data-status="warn" style="--dot: var(--warn)"><i></i>warn</button>
+        <button data-status="down" style="--dot: var(--down)"><i></i>down</button>
+        <button data-status="unknown" style="--dot: var(--unknown)"><i></i>unknown</button>
+      </div>
+      <div class="sizes">
+        <div class="size" data-axis="width"><button data-step="-1" aria-label="Narrower">−</button><output><small>width</small><span>7</span></output><button data-step="1" aria-label="Wider">+</button></div>
+        <div class="size" data-axis="depth"><button data-step="-1" aria-label="Shallower">−</button><output><small>depth</small><span>6</span></output><button data-step="1" aria-label="Deeper">+</button></div>
+        <div class="size" data-axis="height"><button data-step="-1" aria-label="Lower">−</button><output><small>height</small><span>2.5</span></output><button data-step="1" aria-label="Taller">+</button></div>
+      </div>
+      <div class="actions">
+        <button id="open-one" aria-pressed="false">Open</button>
+        <p class="hint">Sizes are in grid cells. The blue cubes resize by dragging too.</p>
+      </div>
+    </div>
+    <p class="log" id="log"></p>
+  </section>
+</div>
+
+<script>
+  // Any error shows in the inspector, so that a problem on a phone stays visible.
+  addEventListener('error', e => {
+    const log = document.getElementById('log');
+    log.textContent = 'Error: ' + e.message;
+    log.classList.add('error');
+  });
+</script>
+<script type="module">
+/*@BUNDLE@*/
+
+// Playground: the scene on the page grid, pan and pinch, the family chips, the inspector of the
+// selected element and a simulation of live statuses.
+const { IsoBox } = __m['core/element.js'];
+const $ = id => document.getElementById(id);
+const view = $('view'), world = $('world'), layer = $('layer'), ui = $('ui');
+const all = [...layer.querySelectorAll('*')].filter(el => el instanceof IsoBox), top = [...layer.children];
+const GROUPS = ['compute', 'network', 'data', 'devices'];
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const portrait = () => innerWidth < innerHeight;
+// View: offset (x, y) in pixels and zoom z.
+let x = 0, y = 0, z = 1, group = '', selected = null;
+$('count').textContent = `${new Set(all.map(el => el.localName)).size} components`;
+
+// Top-level elements on the page grid. Portrait: one column down the screen, each element one step
+// closer along the diagonal, centered, with room above it for its own height. Landscape: one row per
+// family, the rows one behind the other.
+function layout() {
+  if (portrait()) {
+    let s = null, last = '';
+    for (const el of top) {
+      if (s === null) s = 0;
+      else s += 2 * Math.ceil(el.height) + 2 + (el.dataset.group !== last ? 4 : 0);
+      last = el.dataset.group;
+      const off = Math.round((el.depth - el.width) / 2);
+      if (Math.abs(s + off) % 2) s++;
+      el.x = (s + off) / 2;
+      el.z = (s - off) / 2;
+      s += el.width + el.depth;
+    }
+  } else {
+    let depth = 0;
+    for (const g of GROUPS) {
+      let cursor = 0, deepest = 0;
+      for (const el of top.filter(el => el.dataset.group === g)) {
+        el.x = cursor;
+        el.z = depth;
+        cursor += el.width + 3;
+        deepest = Math.max(deepest, el.depth);
+      }
+      depth += deepest + 5;
+    }
+  }
+}
+
+// Moving the view. Input can come faster than frames, so it only changes x, y, z and asks for a frame:
+// one transform is written per frame, whatever the number of events. The loops that already run once
+// per frame (glide, coast) pass true and write at once. A move made in one step (a jump, a zoom
+// button) calls apply() itself: it is not a movement to promote the world for.
+let queued = 0;
+function update(inFrame = false) {
+  stir();
+  if (inFrame) apply();
+  else queued ||= requestAnimationFrame(apply);
+}
+function apply() {
+  queued = 0;
+  world.style.transform = `translate(${x}px, ${y}px) scale(${z})`;
+}
+
+// The view is moving: the world is promoted and the animations paused (see the CSS) until it has
+// rested for 150 ms. A frame loop watches for the rest, so that a long frame cannot end the movement
+// before the input waiting behind it is read. Dropping the promotion then paints the page once more,
+// sharp at the final zoom.
+let stirred = 0;
+function stir() {
+  stirred = performance.now();
+  if (view.classList.contains('busy')) return;
+  view.classList.add('busy');
+  const watch = now => now - stirred > 150 ? view.classList.remove('busy') : requestAnimationFrame(watch);
+  requestAnimationFrame(watch);
+}
+
+// Free room between the top bar and the inspector, inside the gutter.
+function area() {
+  const pad = getComputedStyle(ui), left = parseFloat(pad.paddingLeft), right = innerWidth - parseFloat(pad.paddingRight);
+  const top = document.querySelector('.bar').getBoundingClientRect().bottom + 16;
+  const bottom = document.querySelector('.inspector').getBoundingClientRect().top - 12;
+  return { left, top, width: right - left - 60, height: Math.max(80, bottom - top) };
+}
+
+// Frames the chosen family, or everything. Portrait: the width fits and the family starts at the top,
+// to scroll down through; landscape: the whole family fits. Elements keep a 64-unit margin around
+// their drawing, left out of the frame.
+function fit(animate = true) {
+  const els = group ? top.filter(el => el.dataset.group === group) : top, from = [x, y, z];
+  x = 0; y = 0; z = 1;
+  apply();
+  const boxes = els.map(el => el.getBoundingClientRect());
+  const left = Math.min(...boxes.map(b => b.left)) + 64, right = Math.max(...boxes.map(b => b.right)) - 64;
+  const high = Math.min(...boxes.map(b => b.top)) + 40, low = Math.max(...boxes.map(b => b.bottom)) - 40;
+  [x, y, z] = from;
+  apply();
+  const a = area(), w = right - left, h = low - high;
+  const nz = Math.min(1.2, a.width / w, portrait() ? Infinity : a.height / h);
+  const nx = a.left + (a.width - w * nz) / 2 - left * nz;
+  const ny = portrait() ? a.top - high * nz : a.top + (a.height - h * nz) / 2 - high * nz;
+  glide(nx, ny, nz, animate);
+}
+
+// Short eased move of the view, or a jump when motion is reduced.
+let tween = 0;
+function glide(nx, ny, nz, animate) {
+  cancelAnimationFrame(tween);
+  if (!animate || reduced) { x = nx; y = ny; z = nz; apply(); return; }
+  const from = [x, y, z], start = performance.now();
+  const step = now => {
+    const t = Math.min(1, (now - start) / 320), e = 1 - (1 - t) ** 3;
+    x = from[0] + (nx - from[0]) * e;
+    y = from[1] + (ny - from[1]) * e;
+    z = from[2] + (nz - from[2]) * e;
+    update(true);
+    if (t < 1) tween = requestAnimationFrame(step);
+  };
+  tween = requestAnimationFrame(step);
+}
+
+function zoomAt(px, py, nz, once = false) {
+  nz = Math.min(4, Math.max(.15, nz));
+  x = px - (px - x) * nz / z;
+  y = py - (py - y) * nz / z;
+  z = nz;
+  if (once) apply();
+  else update();
+}
+
+// Fingers and mouse: one pointer pans (and glides on when released), two pinch around their middle.
+// A cube drag never reaches the view: the element stops it.
+const pointers = new Map();
+let gesture = null, moved = false, glideOn = 0;
+const mid = (a, b) => [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2];
+const dist = (a, b) => Math.hypot(a[0] - b[0], a[1] - b[1]) || 1;
+const pan = (p, t) => ({ kind: 'pan', start: p, origin: [x, y], last: [...p, t], v: [0, 0] });
+view.addEventListener('pointerdown', e => {
+  cancelAnimationFrame(glideOn);
+  cancelAnimationFrame(tween);
+  pointers.set(e.pointerId, [e.clientX, e.clientY]);
+  if (pointers.size === 1) {
+    gesture = pan([e.clientX, e.clientY], e.timeStamp);
+    moved = false;
+  } else if (pointers.size === 2) {
+    const [a, b] = [...pointers.values()];
+    gesture = { kind: 'pinch', d: dist(a, b), m: mid(a, b), x, y, z };
+    moved = true;
+    for (const id of pointers.keys()) view.setPointerCapture(id);
+  }
+});
+view.addEventListener('pointermove', e => {
+  if (!pointers.has(e.pointerId)) return;
+  pointers.set(e.pointerId, [e.clientX, e.clientY]);
+  if (gesture?.kind === 'pan') {
+    const dx = e.clientX - gesture.start[0], dy = e.clientY - gesture.start[1];
+    if (!moved) {
+      if (Math.hypot(dx, dy) < 6) return;
+      moved = true;
+      view.setPointerCapture(e.pointerId);
+      view.classList.add('moving');
+    }
+    const [lx, ly, lt] = gesture.last, dt = Math.max(1, e.timeStamp - lt);
+    gesture.v = [.7 * (e.clientX - lx) / dt + .3 * gesture.v[0], .7 * (e.clientY - ly) / dt + .3 * gesture.v[1]];
+    gesture.last = [e.clientX, e.clientY, e.timeStamp];
+    x = gesture.origin[0] + dx;
+    y = gesture.origin[1] + dy;
+    update();
+  } else if (gesture?.kind === 'pinch') {
+    const [a, b] = [...pointers.values()], m = mid(a, b);
+    const nz = Math.min(4, Math.max(.15, gesture.z * dist(a, b) / gesture.d));
+    x = m[0] - (gesture.m[0] - gesture.x) * nz / gesture.z;
+    y = m[1] - (gesture.m[1] - gesture.y) * nz / gesture.z;
+    z = nz;
+    update();
+  }
+});
+function release(e) {
+  if (!pointers.delete(e.pointerId)) return;
+  view.classList.remove('moving');
+  if (gesture?.kind === 'pan' && moved && e.type === 'pointerup' && e.timeStamp - gesture.last[2] < 80 && !reduced) coast(gesture.v);
+  if (!pointers.size) gesture = null;
+  // One finger left after a pinch: it pans on from where it is.
+  else if (gesture?.kind === 'pinch') gesture = pan([...pointers.values()][0], e.timeStamp);
+}
+for (const type of ['pointerup', 'pointercancel']) view.addEventListener(type, release);
+function coast([vx, vy]) {
+  let last = performance.now();
+  const step = now => {
+    const dt = now - last, k = Math.pow(.996, dt);
+    last = now;
+    x += vx * dt;
+    y += vy * dt;
+    vx *= k;
+    vy *= k;
+    update(true);
+    if (Math.hypot(vx, vy) > .03) glideOn = requestAnimationFrame(step);
+  };
+  glideOn = requestAnimationFrame(step);
+}
+// Wheel: scroll pans, pinch on a trackpad (or ctrl + wheel) zooms.
+view.addEventListener('wheel', e => {
+  e.preventDefault();
+  if (e.ctrlKey) zoomAt(e.clientX, e.clientY, z * Math.exp(-e.deltaY * .01));
+  else {
+    x -= e.deltaX;
+    y -= e.deltaY;
+    update();
+  }
+}, { passive: false });
+view.addEventListener('click', e => {
+  if (!moved) select(e.target instanceof IsoBox ? e.target : null);
+});
+
+// Selection: the element glows and shows its blue cubes; the inspector shows its state.
+function select(el) {
+  if (selected) {
+    selected.removeAttribute('data-selected');
+    selected.resizable = false;
+  }
+  selected = el;
+  if (el) {
+    el.setAttribute('data-selected', '');
+    el.resizable = true;
+  }
+  inspect();
+}
+const limits = (el, axis) => [el.constructor.model.minimum[axis], el.constructor.model.maximum?.[axis] ?? Infinity];
+function inspect() {
+  $('details').hidden = !selected;
+  $('empty').hidden = Boolean(selected);
+  if (!selected) return;
+  const el = selected, model = el.constructor.model;
+  $('title').textContent = model.title;
+  $('name').textContent = el.label || '(no label)';
+  $('tag').textContent = `<${el.localName}>`;
+  for (const button of document.querySelectorAll('.statuses button')) button.setAttribute('aria-pressed', button.dataset.status === el.status);
+  for (const box of document.querySelectorAll('.size')) {
+    const axis = box.dataset.axis, [min, max] = limits(el, axis), v = el[axis];
+    // A round model keeps its depth equal to its width.
+    const follows = axis === 'depth' && model.square;
+    box.querySelector('span').textContent = v;
+    box.querySelector('[data-step="-1"]').disabled = follows || v <= min;
+    box.querySelector('[data-step="1"]').disabled = follows || v >= max;
+  }
+  $('open-one').hidden = !model.container;
+  $('open-one').setAttribute('aria-pressed', el.open);
+}
+function note(text) {
+  const log = $('log');
+  log.classList.remove('error');
+  log.textContent = text;
+}
+const describe = el => `${el.localName}${el.label ? ' ' + el.label : ''}, ${el.width} × ${el.depth} × ${el.height} cells, ${el.status}`;
+
+for (const button of document.querySelectorAll('.statuses button')) button.addEventListener('click', () => {
+  selected.status = button.dataset.status;
+  note(`status = ${button.dataset.status}: ${describe(selected)}`);
+  inspect();
+});
+for (const box of document.querySelectorAll('.size')) box.addEventListener('click', e => {
+  const button = e.target.closest('[data-step]');
+  if (!button || !selected) return;
+  const axis = box.dataset.axis, dir = +button.dataset.step, [min, max] = limits(selected, axis), v = selected[axis];
+  // Width and depth go by whole cells, the height by half cells.
+  const next = axis === 'height' ? (dir > 0 ? Math.floor(v * 2 + 1e-9) + 1 : Math.ceil(v * 2 - 1e-9) - 1) / 2 : v + dir;
+  selected[axis] = Math.min(max, Math.max(min, next));
+  layout();
+  note(`${axis} = ${selected[axis]}: ${describe(selected)}`);
+  inspect();
+});
+$('open-one').addEventListener('click', () => {
+  selected.open = !selected.open;
+  inspect();
+});
+$('close').addEventListener('click', () => select(null));
+
+// Standard events of the elements, one listener for all of them: a cube drag fires input at each cell,
+// then change on release.
+for (const type of ['click', 'input', 'change']) document.addEventListener(type, e => {
+  if (!(e.target instanceof IsoBox)) return;
+  note(`${type}: ${describe(e.target)}`);
+  if (type !== 'click' && e.target === selected) inspect();
+  if (type === 'change') layout();
+});
+
+// View tools.
+const center = () => { const a = area(); return [a.left + a.width / 2, a.top + a.height / 2]; };
+$('zoom-in').addEventListener('click', () => zoomAt(...center(), z * 1.35, true));
+$('zoom-out').addEventListener('click', () => zoomAt(...center(), z / 1.35, true));
+$('fit').addEventListener('click', () => fit());
+$('open-all').addEventListener('click', e => {
+  const on = e.currentTarget.getAttribute('aria-pressed') !== 'true';
+  e.currentTarget.setAttribute('aria-pressed', on);
+  for (const el of all) if (el.constructor.model.container) el.open = on;
+  inspect();
+});
+// Live: every element may change status now and then, as a monitoring feed would make it.
+let live = 0;
+$('live').addEventListener('click', e => {
+  e.currentTarget.setAttribute('aria-pressed', !live);
+  if (live) {
+    clearInterval(live);
+    live = 0;
+    return;
+  }
+  live = setInterval(() => {
+    const el = all[Math.floor(Math.random() * all.length)], r = Math.random();
+    el.status = r < .55 ? 'ok' : r < .75 ? 'warn' : r < .9 ? 'down' : 'unknown';
+    if (el === selected) inspect();
+  }, 900);
+});
+for (const chip of document.querySelectorAll('.chip')) chip.addEventListener('click', () => {
+  group = chip.dataset.group;
+  for (const other of document.querySelectorAll('.chip')) other.setAttribute('aria-pressed', other === chip);
+  fit();
+});
+
+// Turning the phone lays the scene out again; the address bar coming and going does not.
+let turned = portrait();
+addEventListener('resize', () => {
+  if (portrait() === turned) return;
+  turned = portrait();
+  layout();
+  fit(false);
+});
+
+layout();
+fit(false);
+inspect();
+</script>
