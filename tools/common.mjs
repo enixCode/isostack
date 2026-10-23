@@ -14,6 +14,8 @@ export function edge() {
   if (!existsSync(EDGE)) throw new Error(`browser not found at ${EDGE}: set ISOSTACK_BROWSER to a Chromium-based browser (Edge, Chrome)`);
   return EDGE;
 }
+// Python: python on Windows, python3 elsewhere (most Linux and macOS systems ship no bare python).
+export const PYTHON = process.platform === 'win32' ? 'python' : 'python3';
 export const camel = name => name.replace(/-(\w)/g, (_, c) => c.toUpperCase());
 export const sleep = ms => new Promise(r => setTimeout(r, ms));
 export const components = dir => readdirSync(join(dir, 'components'), { withFileTypes: true }).filter(d => d.isDirectory()).map(d => d.name).sort();

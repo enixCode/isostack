@@ -9,7 +9,7 @@
 import { execFileSync, spawn } from 'node:child_process';
 import { existsSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
-import { ROOT, TOOLS, camel, components, edge, load, outDir, withLock } from './common.mjs';
+import { PYTHON, ROOT, TOOLS, camel, components, edge, load, outDir, withLock } from './common.mjs';
 
 const args = process.argv.slice(2), flags = args.filter(a => a.startsWith('--'));
 const [dirArg, ...picked] = args.filter(a => !a.startsWith('--'));
@@ -66,7 +66,7 @@ for (const name of names) {
 const list = join(out, 'files.txt');
 writeFileSync(list, files.join('\n'));
 try {
-  execFileSync('python', ['-I', '-c', `
+  execFileSync(PYTHON, ['-I', '-c', `
 import sys, re, xml.etree.ElementTree as E
 hostile = set(sys.argv[1].split('|'))
 N = r'[-+]?(\\d+\\.?\\d*|\\.\\d+)([eE][-+]?\\d+)?'
@@ -110,7 +110,7 @@ document.title = bad.length ? 'LIVE FAIL ' + bad.join(',') : 'LIVE OK ' + docume
     '--window-size=1400,1600', '--virtual-time-budget=5000', dom ? '--dump-dom' : `--screenshot=${png}`, url],
     { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'], timeout: 90000 });
   await withLock(`oracle ${project}`, async () => {
-    const server = spawn('python', ['-I', join(TOOLS, 'serve.py'), project, out], { stdio: ['ignore', 'pipe', 'inherit'] });
+    const server = spawn(PYTHON, ['-I', join(TOOLS, 'serve.py'), project, out], { stdio: ['ignore', 'pipe', 'inherit'] });
     const port = await new Promise((resolve, reject) => {
       server.stdout.once('data', d => resolve(String(d).trim()));
       server.once('error', reject);
