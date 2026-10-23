@@ -16,7 +16,7 @@
   [data-status="unknown"] { --_color: var(--iso-unknown, #94a3b8); --_disk: #2b313d; --_disk-anim: none; }
   /* Cover: the front faces fade out when the box is open, to show the inside. */
   .cover { transition: opacity .4s; }
-  [data-open] .cover { opacity: .08; }
+  [data-open] .cover { opacity: .04; }
   /* Inside: painted only while the box is open, and through the fade that follows closing it (the
      switch to none waits for the end of the transition, where supported). */
   .inside { display: none; transition: display .4s allow-discrete; }
@@ -25,7 +25,7 @@
   .floor-grid { fill: none; stroke: #c3cad5; stroke-width: 1; vector-effect: non-scaling-stroke; }
   /* Front edges fade partly with the cover; the back ones stay sharp. */
   .edge { fill: none; stroke: #0f1218; stroke-width: 1.5; stroke-linejoin: round; vector-effect: non-scaling-stroke; transition: opacity .4s; }
-  [data-open] .edge { opacity: .35; }
+  [data-open] .edge { opacity: .25; }
   /* Status halo on the ground, warn and down only, in the status color. */
   .halo { display: none; }
   [data-status="warn"] .halo, [data-status="down"] .halo { display: inline; }
