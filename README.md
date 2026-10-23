@@ -1,3 +1,8 @@
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".github/assets/isostack-banner-dark.svg">
+  <img alt="isostack, isometric infrastructure icons, part of isoAtlas" src=".github/assets/isostack-banner-light.svg" width="100%">
+</picture>
+
 # isostack
 
 Isometric infrastructure icons with zero dependencies. Each icon is one drawing with two outputs: a live element (`<iso-server>`, `<iso-db>`..., native Web Components you can resize, nest and drive from JS) and frozen `.svg` files that need no JS at all (README, docs, diagram tools).

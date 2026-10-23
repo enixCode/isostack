@@ -1,0 +1,476 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 400" width="1280" height="400" role="img" aria-label="isostack, isometric infrastructure icons. Part of isoAtlas.">
+<style>
+@font-face { font-family: RHD; font-weight: 400; src: url(data:font/woff;base64,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) format('woff'); }
+@font-face { font-family: RHD; font-weight: 800; src: url(data:font/woff;base64,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) format('woff'); }
+@font-face { font-family: RHT; font-weight: 400; src: url(data:font/woff;base64,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) format('woff'); }
+@font-face { font-family: RHT; font-weight: 500; src: url(data:font/woff;base64,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) format('woff'); }
+@font-face { font-family: RHM; font-weight: 500; src: url(data:font/woff;base64,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) format('woff'); }
+.flow { animation: flow 1.1s linear infinite; }
+@keyframes flow { to { stroke-dashoffset: -34; } }
+@media (prefers-reduced-motion: reduce) { .flow { animation: none; } }
+
+  /* Status goes through inherited variables (--_ prefix: internal): they are the only ones that
+     reach the copies made by use, such as the network ports. */
+  [data-status] {
+    --_color: var(--iso-ok, #22c55e); --_disk: var(--iso-ok, #22c55e); --_disk-anim: activity;
+    --_fault: #3a2d18; --_fault-anim: none;
+  }
+  [data-status="warn"] { --_color: var(--iso-warn, #f59e0b); --_fault: var(--_color); }
+  [data-status="down"] {
+    --_color: var(--iso-down, #ef4444); --_fault: var(--_color); --_fault-anim: pulse;
+    --_disk: #1f2a22; --_disk-anim: none;
+  }
+  /* Unknown: no data, so a grey status light and no disk activity. */
+  [data-status="unknown"] { --_color: var(--iso-unknown, #94a3b8); --_disk: #2b313d; --_disk-anim: none; }
+  /* Cover: the front faces fade out when the box is open, to show the inside. */
+  .cover { transition: opacity .4s; }
+  [data-open] .cover { opacity: .08; }
+  /* Inside: painted only while the box is open, and through the fade that follows closing it (the
+     switch to none waits for the end of the transition, where supported). */
+  .inside { display: none; transition: display .4s allow-discrete; }
+  [data-open] .inside { display: inline; }
+  .inside rect { stroke: #2a303b; vector-effect: non-scaling-stroke; }
+  .floor-grid { fill: none; stroke: #c3cad5; stroke-width: 1; vector-effect: non-scaling-stroke; }
+  /* Front edges fade partly with the cover; the back ones stay sharp. */
+  .edge { fill: none; stroke: #0f1218; stroke-width: 1.5; stroke-linejoin: round; vector-effect: non-scaling-stroke; transition: opacity .4s; }
+  [data-open] .edge { opacity: .35; }
+  /* Status halo on the ground, warn and down only, in the status color. */
+  .halo { display: none; }
+  [data-status="warn"] .halo, [data-status="down"] .halo { display: inline; }
+  .halo-core { fill: var(--_color); }
+  .halo-fade stop { stop-color: var(--_color); }
+  /* Lights glow without a filter: a 2 units wide band around the dot, under its flat core, painted by
+     a radial gradient of its own color (see glow below). */
+  .led, .fault { stroke-width: 4; paint-order: stroke; pointer-events: none; }
+  .led.blue { stroke: url(#glow-blue); }
+  .led.status { stroke: url(#glow-status); }
+  .led.activity { stroke: url(#glow-disk); }
+  .fault { stroke: url(#glow-fault); }
+  .blue { fill: #38bdf8; }
+  .status { fill: var(--_color); }
+  .screw { fill: #11151b; stroke: #4b5467; }
+  .label { font: 700 14px ui-monospace, Consolas, monospace; fill: #1e293b; }
+  /* Animations. A light is lit or dim, never half way, and every change of every light falls on one
+     shared beat of .2 s, so that the browser repaints a few times a second instead of at every frame.
+     --period (a whole number of 2.4 s turns; 0 keeps the light lit) and --delay (whole beats) place a
+     light in the pattern; the element shifts all its lights by --_phase, so that devices of a kind do
+     not blink together. --iso-speed speeds the beat up or down, --iso-animation: paused freezes it. */
+  .activity { fill: var(--_disk); animation: var(--_disk-anim) calc(var(--period, 2.4s) / var(--iso-speed, 1)) calc((var(--delay, 0s) + var(--_phase, 0s)) / var(--iso-speed, 1)) step-end infinite var(--iso-animation, running); }
+  .pulse { animation: pulse calc(2.4s / var(--iso-speed, 1)) calc(var(--_phase, 0s) / var(--iso-speed, 1)) step-end infinite var(--iso-animation, running); }
+  .fault { fill: var(--_fault); animation: var(--_fault-anim) calc(.8s / var(--iso-speed, 1)) step-end infinite var(--iso-animation, running); }
+  @keyframes activity { 0%, 25%, 66.667%, 83.333% { opacity: 1; } 16.667%, 50%, 75% { opacity: .15; } }
+  @keyframes pulse { 0% { opacity: 1; } 50% { opacity: .3; } }
+  /* An animated light is moved to a layer of its own, which would not fade with the cover: the lights of
+     an open cover stand still (the element also keeps them still through the fade that closes it). */
+  [data-open] .cover .activity, [data-open] .cover .pulse, [data-open] .cover .fault { animation: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .activity, .pulse, .fault { animation: none !important; }
+    .cover, .edge, .inside { transition: none; }
+  }
+
+.cloud-line { fill: none; stroke: #93a5bf; stroke-width: 3.5; }
+
+</style>
+<defs>
+  <clipPath id="card"><rect width="1280" height="400" rx="22"/></clipPath>
+  <pattern id="plan" width="69.3" height="40" patternUnits="userSpaceOnUse">
+    <circle cx="0" cy="0" r="2.6" fill="#b4c2d3"/><circle cx="69.3" cy="0" r="2.6" fill="#b4c2d3"/><circle cx="34.6" cy="20" r="2.6" fill="#b4c2d3"/><circle cx="0" cy="40" r="2.6" fill="#b4c2d3"/><circle cx="69.3" cy="40" r="2.6" fill="#b4c2d3"/>
+  </pattern>
+  <radialGradient id="glow" cx="0.7" cy=".55" r=".6"><stop offset="0" stop-color="#dfe9f5"/><stop offset="1" stop-color="#dfe9f5" stop-opacity="0"/></radialGradient>
+  <linearGradient id="fade-x" x1="0" x2="1"><stop offset=".3" stop-color="#fff" stop-opacity="0"/><stop offset=".55" stop-color="#fff"/></linearGradient>
+  <mask id="fade"><rect width="1280" height="400" fill="url(#fade-x)"/></mask>
+</defs>
+<g data-status="ok"><defs><radialGradient id="glow-status" r=".875" style="color: var(--_color)">
+    <stop offset=".571" stop-color="currentColor" stop-opacity=".42"/>
+    <stop offset=".77" stop-color="currentColor" stop-opacity=".18"/>
+    <stop offset="1" stop-color="currentColor" stop-opacity="0"/>
+  </radialGradient><radialGradient id="glow-disk" r=".875" style="color: var(--_disk)">
+    <stop offset=".571" stop-color="currentColor" stop-opacity=".42"/>
+    <stop offset=".77" stop-color="currentColor" stop-opacity=".18"/>
+    <stop offset="1" stop-color="currentColor" stop-opacity="0"/>
+  </radialGradient><radialGradient id="glow-fault" r=".875" style="color: var(--_fault)">
+    <stop offset=".571" stop-color="currentColor" stop-opacity=".42"/>
+    <stop offset=".77" stop-color="currentColor" stop-opacity=".18"/>
+    <stop offset="1" stop-color="currentColor" stop-opacity="0"/>
+  </radialGradient><radialGradient id="glow-blue" r=".875" style="color: #38bdf8">
+    <stop offset=".571" stop-color="currentColor" stop-opacity=".42"/>
+    <stop offset=".77" stop-color="currentColor" stop-opacity=".18"/>
+    <stop offset="1" stop-color="currentColor" stop-opacity="0"/>
+  </radialGradient></defs></g>
+<g clip-path="url(#card)">
+  <rect width="1280" height="400" fill="#f5f8fc"/>
+  <rect width="1280" height="400" fill="url(#glow)"/>
+  <g mask="url(#fade)"><g transform="translate(933.9 73.5) scale(0.625)"><rect x="-4000" y="-4000" width="8000" height="8000" fill="url(#plan)"/></g></g>
+  <g transform="translate(933.9 73.5) scale(0.625)"><path d="M-381 240L-245.9 318L-124.7 248" stroke="#6aa6dc" stroke-width="11" fill="none" stroke-linejoin="round" stroke-linecap="round"/><path class="flow" d="M-381 240L-245.9 318L-124.7 248" stroke="#ffffff" stroke-width="5" fill="none" stroke-linecap="round" stroke-dasharray="0 34" style="animation-delay: 0s"/><path d="M-124.7 248L-97 264L138.6 128" stroke="#6aa6dc" stroke-width="11" fill="none" stroke-linejoin="round" stroke-linecap="round"/><path class="flow" d="M-124.7 248L-97 264L138.6 128" stroke="#ffffff" stroke-width="5" fill="none" stroke-linecap="round" stroke-dasharray="0 34" style="animation-delay: -0.37s"/><path d="M-124.7 248L97 376L138.6 352" stroke="#6aa6dc" stroke-width="11" fill="none" stroke-linejoin="round" stroke-linecap="round"/><path class="flow" d="M-124.7 248L97 376L138.6 352" stroke="#ffffff" stroke-width="5" fill="none" stroke-linecap="round" stroke-dasharray="0 34" style="animation-delay: -0.74s"/><path d="M138.6 128L332.5 240L401.8 200" stroke="#6aa6dc" stroke-width="11" fill="none" stroke-linejoin="round" stroke-linecap="round"/><path class="flow" d="M138.6 128L332.5 240L401.8 200" stroke="#ffffff" stroke-width="5" fill="none" stroke-linecap="round" stroke-dasharray="0 34" style="animation-delay: -1.1099999999999999s"/><path d="M138.6 352L304.8 448L401.8 392" stroke="#6aa6dc" stroke-width="11" fill="none" stroke-linejoin="round" stroke-linecap="round"/><path class="flow" d="M138.6 352L304.8 448L401.8 392" stroke="#ffffff" stroke-width="5" fill="none" stroke-linecap="round" stroke-dasharray="0 34" style="animation-delay: -1.48s"/><path d="M138.6 352L401.8 200L401.8 200" stroke="#6aa6dc" stroke-width="11" fill="none" stroke-linejoin="round" stroke-linecap="round"/><path class="flow" d="M138.6 352L401.8 200L401.8 200" stroke="#ffffff" stroke-width="5" fill="none" stroke-linecap="round" stroke-dasharray="0 34" style="animation-delay: -1.85s"/><g data-status="ok" transform="translate(138.6 48)" style="--_phase: -1.1s"><defs>
+  <pattern id="perforation-web1" width="6" height="6" patternUnits="userSpaceOnUse">
+    <circle cx="3" cy="3" r="1.3" fill="#0d1015"/>
+  </pattern>
+  <pattern id="slots-web1" width="8" height="10" patternUnits="userSpaceOnUse">
+    <rect width="4" height="10" fill="#0d1015"/>
+  </pattern>
+  <radialGradient id="glow-status" r=".875" style="color: var(--_color)">
+    <stop offset=".571" stop-color="currentColor" stop-opacity=".42"/>
+    <stop offset=".77" stop-color="currentColor" stop-opacity=".18"/>
+    <stop offset="1" stop-color="currentColor" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="glow-disk" r=".875" style="color: var(--_disk)">
+    <stop offset=".571" stop-color="currentColor" stop-opacity=".42"/>
+    <stop offset=".77" stop-color="currentColor" stop-opacity=".18"/>
+    <stop offset="1" stop-color="currentColor" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="glow-fault" r=".875" style="color: var(--_fault)">
+    <stop offset=".571" stop-color="currentColor" stop-opacity=".42"/>
+    <stop offset=".77" stop-color="currentColor" stop-opacity=".18"/>
+    <stop offset="1" stop-color="currentColor" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="glow-blue" r=".875" style="color: #38bdf8">
+    <stop offset=".571" stop-color="currentColor" stop-opacity=".42"/>
+    <stop offset=".77" stop-color="currentColor" stop-opacity=".18"/>
+    <stop offset="1" stop-color="currentColor" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="shadow-edge-web1" gradientUnits="userSpaceOnUse" x2="32"><stop offset="0" stop-color="#0b1020" stop-opacity="0.2"/><stop offset="0.33" stop-color="#0b1020" stop-opacity="0.152"/><stop offset="0.67" stop-color="#0b1020" stop-opacity="0.048"/><stop offset="1" stop-color="#0b1020" stop-opacity="0"/></linearGradient>
+  <radialGradient id="shadow-corner-web1" href="#shadow-edge-web1" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="32"/>
+  <linearGradient id="halo-edge-web1" class="halo-fade" gradientUnits="userSpaceOnUse" x2="52"><stop offset="0" stop-opacity="0.55"/><stop offset="0.25" stop-opacity="0.448"/><stop offset="0.5" stop-opacity="0.248"/><stop offset="0.75" stop-opacity="0.07"/><stop offset="1" stop-opacity="0"/></linearGradient>
+  <radialGradient id="halo-corner-web1" href="#halo-edge-web1" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="52"/>
+    <g id="server-bay-web1">
+      <rect width="38" height="30" rx="2" fill="#191d25" stroke="#394151"/>
+      <path d="M5 7h20M5 11h20M5 15h20" stroke="#2b313d" stroke-width="1.6"/>
+      <rect x="5" y="21" width="20" height="5" rx="1" fill="#343c4a"/>
+    </g>
+  </defs>
+    <g class="ground" shape-rendering="crispEdges" transform="matrix(.866 .5 -.866 .5 0 0)">
+      <g class="halo"><rect transform="matrix(1 0 0 1 160 0)" width="52" height="160" fill="url(#halo-edge-web1)"/><rect transform="matrix(0 1 1 0 0 160)" width="52" height="160" fill="url(#halo-edge-web1)"/><rect transform="matrix(1 0 0 1 160 160)" width="52" height="52" fill="url(#halo-corner-web1)"/><rect transform="matrix(-1 0 0 1 0 160)" width="52" height="52" fill="url(#halo-corner-web1)"/><rect transform="matrix(1 0 0 -1 160 0)" width="52" height="52" fill="url(#halo-corner-web1)"/><rect transform="matrix(-1 0 0 1 0 0)" width="52" height="160" fill="url(#halo-edge-web1)"/><rect transform="matrix(0 -1 1 0 0 0)" width="52" height="160" fill="url(#halo-edge-web1)"/><rect transform="matrix(-1 0 0 -1 0 0)" width="52" height="52" fill="url(#halo-corner-web1)"/></g>
+      <rect transform="matrix(1 0 0 1 154 22)" width="32" height="132" fill="url(#shadow-edge-web1)"/><rect transform="matrix(0 1 1 0 22 154)" width="32" height="132" fill="url(#shadow-edge-web1)"/><rect transform="matrix(1 0 0 1 154 154)" width="32" height="32" fill="url(#shadow-corner-web1)"/><rect transform="matrix(-1 0 0 1 22 154)" width="32" height="32" fill="url(#shadow-corner-web1)"/><rect transform="matrix(1 0 0 -1 154 22)" width="32" height="32" fill="url(#shadow-corner-web1)"/>
+    </g>
+    <g class="cover">
+      <g transform="matrix(.866 .5 -.866 .5 0 -100)">
+      <rect width="160" height="160" fill="#3b4352"/>
+      <rect x="10" y="10" width="140" height="140" rx="3" fill="none" stroke="#4b5467" stroke-width="1.5"/>
+      <rect x="26" y="26" width="96" height="54" fill="url(#perforation-web1)"/>
+      <rect x="48" y="112" width="88" height="28" rx="3" fill="#e2e8f0"/>
+  <text x="60" y="131" class="label">web-01</text></g>
+      <g transform="matrix(.866 .5 0 1 -138.56 -20)">
+      <rect width="160" height="100" fill="#252b36"/>
+      
+  <rect width="16" height="100" fill="#2f3644"/>
+  <rect x="144" width="16" height="100" fill="#2f3644"/>
+  <circle cx="8" cy="14" r="3" class="screw"/><circle cx="8" cy="86" r="3" class="screw"/><circle cx="152" cy="14" r="3" class="screw"/><circle cx="152" cy="86" r="3" class="screw"/>
+      <use href="#server-bay-web1" x="20" y="18"/><circle cx="52" cy="26" r="2" class="led activity" style="--period: 2.4s; --delay: -0.0s"/><circle cx="52" cy="33" r="2" class="fault"/><use href="#server-bay-web1" x="20" y="52"/><circle cx="52" cy="60" r="2" class="led activity" style="--period: 0s"/><circle cx="52" cy="67" r="2" class="fault"/>
+      <rect x="68" y="18" width="40" height="64" fill="url(#perforation-web1)" stroke="#394151"/>
+      
+  <circle cx="126" cy="27" r="6" fill="#191d25" stroke="#4b5467"/>
+  <circle cx="126" cy="27" r="2.5" class="led blue"/>
+  <circle cx="126" cy="45" r="2.2" class="led status pulse"/>
+  <circle cx="126" cy="55" r="2.2" class="led activity" style="--period: 2.4s; --delay: -0.0s"/>
+  <circle cx="126" cy="65" r="2.2" class="fault"/>
+  <rect x="121" y="74" width="10" height="5" rx="1" fill="#0d1015" stroke="#4b5467"/></g>
+      <g transform="matrix(.866 -.5 0 1 0 60)">
+      <rect width="160" height="100" fill="#1d222b"/>
+      <path d="M0 10H160" stroke="#2b313c" stroke-width="1.5"/>
+      <rect y="80" width="160" height="10" fill="#282e39"/>
+      <rect x="8" y="22" width="20" height="48" fill="url(#slots-web1)"/><circle cx="20" cy="85" r="2" class="screw"/><rect x="48" y="22" width="20" height="48" fill="url(#slots-web1)"/><circle cx="60" cy="85" r="2" class="screw"/><rect x="88" y="22" width="20" height="48" fill="url(#slots-web1)"/><circle cx="100" cy="85" r="2" class="screw"/><rect x="128" y="22" width="20" height="48" fill="url(#slots-web1)"/><circle cx="140" cy="85" r="2" class="screw"/></g>
+    </g>
+    <!-- Visible edges, always drawn. -->
+    <rect class="edge" transform="matrix(.866 .5 -.866 .5 0 -100)" width="160" height="160"/>
+    <rect class="edge" transform="matrix(.866 .5 0 1 -138.56 -20)" width="160" height="100"/>
+    <rect class="edge" transform="matrix(.866 -.5 0 1 0 60)" width="160" height="100"/></g><g data-status="ok" transform="translate(401.8 140)" style="--_phase: -0.9s"><defs>
+  <radialGradient id="glow-status" r=".875" style="color: var(--_color)">
+    <stop offset=".571" stop-color="currentColor" stop-opacity=".42"/>
+    <stop offset=".77" stop-color="currentColor" stop-opacity=".18"/>
+    <stop offset="1" stop-color="currentColor" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="glow-disk" r=".875" style="color: var(--_disk)">
+    <stop offset=".571" stop-color="currentColor" stop-opacity=".42"/>
+    <stop offset=".77" stop-color="currentColor" stop-opacity=".18"/>
+    <stop offset="1" stop-color="currentColor" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="glow-fault" r=".875" style="color: var(--_fault)">
+    <stop offset=".571" stop-color="currentColor" stop-opacity=".42"/>
+    <stop offset=".77" stop-color="currentColor" stop-opacity=".18"/>
+    <stop offset="1" stop-color="currentColor" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="glow-blue" r=".875" style="color: #38bdf8">
+    <stop offset=".571" stop-color="currentColor" stop-opacity=".42"/>
+    <stop offset=".77" stop-color="currentColor" stop-opacity=".18"/>
+    <stop offset="1" stop-color="currentColor" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="shadow-edge-db" gradientUnits="userSpaceOnUse" x2="32"><stop offset="0" stop-color="#0b1020" stop-opacity="0.2"/><stop offset="0.33" stop-color="#0b1020" stop-opacity="0.152"/><stop offset="0.67" stop-color="#0b1020" stop-opacity="0.048"/><stop offset="1" stop-color="#0b1020" stop-opacity="0"/></linearGradient>
+  <radialGradient id="shadow-corner-db" href="#shadow-edge-db" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="32"/>
+  <linearGradient id="halo-edge-db" class="halo-fade" gradientUnits="userSpaceOnUse" x2="52"><stop offset="0" stop-opacity="0.55"/><stop offset="0.25" stop-opacity="0.448"/><stop offset="0.5" stop-opacity="0.248"/><stop offset="0.75" stop-opacity="0.07"/><stop offset="1" stop-opacity="0"/></linearGradient>
+  <radialGradient id="halo-corner-db" href="#halo-edge-db" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="52"/>
+  <linearGradient id="cylinder-shade-db" x1="0" x2="1" y1="0" y2="0">
+    <stop offset="0" stop-color="#ffffff" stop-opacity=".1"/>
+    <stop offset=".45" stop-color="#ffffff" stop-opacity="0"/>
+    <stop offset="1" stop-color="#000000" stop-opacity=".3"/>
+  </linearGradient></defs>
+    <g class="ground" shape-rendering="crispEdges" transform="matrix(.866 .5 -.866 .5 0 0)">
+      <g class="halo"><rect class="halo-core" fill-opacity=".55" x="0" y="0" width="120" height="120"/><rect transform="matrix(1 0 0 1 120 0)" width="52" height="120" fill="url(#halo-edge-db)"/><rect transform="matrix(0 1 1 0 0 120)" width="52" height="120" fill="url(#halo-edge-db)"/><rect transform="matrix(1 0 0 1 120 120)" width="52" height="52" fill="url(#halo-corner-db)"/><rect transform="matrix(-1 0 0 1 0 120)" width="52" height="52" fill="url(#halo-corner-db)"/><rect transform="matrix(1 0 0 -1 120 0)" width="52" height="52" fill="url(#halo-corner-db)"/><rect transform="matrix(-1 0 0 1 0 0)" width="52" height="120" fill="url(#halo-edge-db)"/><rect transform="matrix(0 -1 1 0 0 0)" width="52" height="120" fill="url(#halo-edge-db)"/><rect transform="matrix(-1 0 0 -1 0 0)" width="52" height="52" fill="url(#halo-corner-db)"/></g>
+      <rect fill="#0b1020" fill-opacity=".2" x="22" y="22" width="92" height="92"/><rect transform="matrix(1 0 0 1 114 22)" width="32" height="92" fill="url(#shadow-edge-db)"/><rect transform="matrix(0 1 1 0 22 114)" width="32" height="92" fill="url(#shadow-edge-db)"/><rect transform="matrix(1 0 0 1 114 114)" width="32" height="32" fill="url(#shadow-corner-db)"/><rect transform="matrix(-1 0 0 1 22 114)" width="32" height="32" fill="url(#shadow-corner-db)"/><rect transform="matrix(1 0 0 -1 114 22)" width="32" height="32" fill="url(#shadow-corner-db)"/><rect transform="matrix(-1 0 0 1 22 22)" width="32" height="92" fill="url(#shadow-edge-db)"/><rect transform="matrix(0 -1 1 0 22 22)" width="32" height="92" fill="url(#shadow-edge-db)"/><rect transform="matrix(-1 0 0 -1 22 22)" width="32" height="32" fill="url(#shadow-corner-db)"/>
+    </g>
+    <g class="art"><g transform="translate(0 0)">
+  <path d="M-73.488 29.333333333333336V60A73.488 42.432 0 0 0 73.488 60V29.333333333333336Z" fill="#252b36"/>
+  <path d="M-73.488 29.333333333333336V60A73.488 42.432 0 0 0 73.488 60V29.333333333333336Z" fill="url(#cylinder-shade-db)"/>
+  <ellipse cx="0" cy="29.333333333333336" rx="73.488" ry="42.432" fill="#3b4352"/>
+  <path class="edge" d="M-73.488 29.333333333333336V60A73.488 42.432 0 0 0 73.488 60V29.333333333333336"/>
+  <ellipse class="edge" cx="0" cy="29.333333333333336" rx="73.488" ry="42.432"/></g><path d="M-28.617575139578108,80.74912676419709A73.488 42.432 0 0 0 7.336558122542107,83.88668340774386L7.336558122542107,89.88668340774386A73.488 42.432 0 0 1 -28.617575139578108,86.74912676419709Z" fill="#0d1015" stroke="#394151"/><circle cx="18.181222157696382" cy="85.77955854469275" r="2.2" class="led activity" style="--period: 2.4s; --delay: -0.0s"/><circle cx="28.617575139578108" cy="83.74912676419709" r="2.2" class="fault"/><g transform="translate(0 -26.666666666666664)">
+  <path d="M-68.5888 52V56A68.5888 39.6032 0 0 0 68.5888 56V52Z" fill="#0d1015"/>
+  <path d="M-68.5888 52V56A68.5888 39.6032 0 0 0 68.5888 56V52Z" fill="url(#cylinder-shade-db)"/>
+  <ellipse cx="0" cy="52" rx="68.5888" ry="39.6032" fill="#191d25"/>
+  <path class="edge" d="M-68.5888 52V56A68.5888 39.6032 0 0 0 68.5888 56V52"/>
+  <ellipse class="edge" cx="0" cy="52" rx="68.5888" ry="39.6032"/></g><g transform="translate(0 -34.666666666666664)">
+  <path d="M-73.488 29.333333333333336V60A73.488 42.432 0 0 0 73.488 60V29.333333333333336Z" fill="#252b36"/>
+  <path d="M-73.488 29.333333333333336V60A73.488 42.432 0 0 0 73.488 60V29.333333333333336Z" fill="url(#cylinder-shade-db)"/>
+  <ellipse cx="0" cy="29.333333333333336" rx="73.488" ry="42.432" fill="#3b4352"/>
+  <path class="edge" d="M-73.488 29.333333333333336V60A73.488 42.432 0 0 0 73.488 60V29.333333333333336"/>
+  <ellipse class="edge" cx="0" cy="29.333333333333336" rx="73.488" ry="42.432"/></g><path d="M-28.617575139578108,46.08246009753042A73.488 42.432 0 0 0 7.336558122542107,49.22001674107719L7.336558122542107,55.22001674107719A73.488 42.432 0 0 1 -28.617575139578108,52.08246009753042Z" fill="#0d1015" stroke="#394151"/><circle cx="18.181222157696382" cy="51.112891878026076" r="2.2" class="led activity" style="--period: 7.2s; --delay: -1.4s"/><circle cx="28.617575139578108" cy="49.08246009753042" r="2.2" class="fault"/><g transform="translate(0 -61.33333333333333)">
+  <path d="M-68.5888 52V56A68.5888 39.6032 0 0 0 68.5888 56V52Z" fill="#0d1015"/>
+  <path d="M-68.5888 52V56A68.5888 39.6032 0 0 0 68.5888 56V52Z" fill="url(#cylinder-shade-db)"/>
+  <ellipse cx="0" cy="52" rx="68.5888" ry="39.6032" fill="#191d25"/>
+  <path class="edge" d="M-68.5888 52V56A68.5888 39.6032 0 0 0 68.5888 56V52"/>
+  <ellipse class="edge" cx="0" cy="52" rx="68.5888" ry="39.6032"/></g><g transform="translate(0 -69.33333333333333)">
+  <path d="M-73.488 25.33333333333333V60A73.488 42.432 0 0 0 73.488 60V25.33333333333333Z" fill="#252b36"/>
+  <path d="M-73.488 25.33333333333333V60A73.488 42.432 0 0 0 73.488 60V25.33333333333333Z" fill="url(#cylinder-shade-db)"/>
+  <ellipse cx="0" cy="25.33333333333333" rx="73.488" ry="42.432" fill="#3b4352"/>
+  <path class="edge" d="M-73.488 25.33333333333333V60A73.488 42.432 0 0 0 73.488 60V25.33333333333333"/>
+  <ellipse class="edge" cx="0" cy="25.33333333333333" rx="73.488" ry="42.432"/></g><path d="M-28.617575139578108,9.415793430863765A73.488 42.432 0 0 0 7.336558122542107,12.553350074410531L7.336558122542107,18.55335007441053A73.488 42.432 0 0 1 -28.617575139578108,15.415793430863765Z" fill="#0d1015" stroke="#394151"/><circle cx="18.181222157696382" cy="14.446225211359419" r="2.2" class="led activity" style="--period: 4.8s; --delay: -0.4s"/><circle cx="28.617575139578108" cy="12.415793430863765" r="2.2" class="fault"/>
+      <circle cx="-47.342269399723435" cy="5.78711702418876" r="2.2" class="led blue"/><circle cx="-38.41123907965628" cy="9.507653853362292" r="2.2" class="led status pulse"/>
+      <g transform="matrix(.866 .5 -.866 .5 0 -104)">
+        <circle cx="60" cy="60" r="54" fill="none" stroke="#818cf8" stroke-opacity=".5" stroke-width="1.5"/>
+        
+      </g></g></g><g data-status="ok" transform="translate(-398.4 170)" style="--_phase: -0.2s"><defs>
+  <radialGradient id="glow-status" r=".875" style="color: var(--_color)">
+    <stop offset=".571" stop-color="currentColor" stop-opacity=".42"/>
+    <stop offset=".77" stop-color="currentColor" stop-opacity=".18"/>
+    <stop offset="1" stop-color="currentColor" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="glow-disk" r=".875" style="color: var(--_disk)">
+    <stop offset=".571" stop-color="currentColor" stop-opacity=".42"/>
+    <stop offset=".77" stop-color="currentColor" stop-opacity=".18"/>
+    <stop offset="1" stop-color="currentColor" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="glow-fault" r=".875" style="color: var(--_fault)">
+    <stop offset=".571" stop-color="currentColor" stop-opacity=".42"/>
+    <stop offset=".77" stop-color="currentColor" stop-opacity=".18"/>
+    <stop offset="1" stop-color="currentColor" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="glow-blue" r=".875" style="color: #38bdf8">
+    <stop offset=".571" stop-color="currentColor" stop-opacity=".42"/>
+    <stop offset=".77" stop-color="currentColor" stop-opacity=".18"/>
+    <stop offset="1" stop-color="currentColor" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="shadow-edge-cloud" gradientUnits="userSpaceOnUse" x2="32"><stop offset="0" stop-color="#0b1020" stop-opacity="0.2"/><stop offset="0.33" stop-color="#0b1020" stop-opacity="0.152"/><stop offset="0.67" stop-color="#0b1020" stop-opacity="0.048"/><stop offset="1" stop-color="#0b1020" stop-opacity="0"/></linearGradient>
+  <radialGradient id="shadow-corner-cloud" href="#shadow-edge-cloud" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="32"/>
+  <linearGradient id="halo-edge-cloud" class="halo-fade" gradientUnits="userSpaceOnUse" x2="52"><stop offset="0" stop-opacity="0.55"/><stop offset="0.25" stop-opacity="0.448"/><stop offset="0.5" stop-opacity="0.248"/><stop offset="0.75" stop-opacity="0.07"/><stop offset="1" stop-opacity="0"/></linearGradient>
+  <radialGradient id="halo-corner-cloud" href="#halo-edge-cloud" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="52"/>
+    <radialGradient id="cloud-puff-cloud" cx=".38" cy=".32" r=".72">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset=".55" stop-color="#edf2f9"/>
+      <stop offset="1" stop-color="#c3d1e3"/>
+    </radialGradient>
+  </defs>
+    <g class="ground" shape-rendering="crispEdges" transform="matrix(.866 .5 -.866 .5 0 0)">
+      <g class="halo"><rect class="halo-core" fill-opacity=".55" x="0" y="0" width="160" height="120"/><rect transform="matrix(1 0 0 1 160 0)" width="52" height="120" fill="url(#halo-edge-cloud)"/><rect transform="matrix(0 1 1 0 0 120)" width="52" height="160" fill="url(#halo-edge-cloud)"/><rect transform="matrix(1 0 0 1 160 120)" width="52" height="52" fill="url(#halo-corner-cloud)"/><rect transform="matrix(-1 0 0 1 0 120)" width="52" height="52" fill="url(#halo-corner-cloud)"/><rect transform="matrix(1 0 0 -1 160 0)" width="52" height="52" fill="url(#halo-corner-cloud)"/><rect transform="matrix(-1 0 0 1 0 0)" width="52" height="120" fill="url(#halo-edge-cloud)"/><rect transform="matrix(0 -1 1 0 0 0)" width="52" height="160" fill="url(#halo-edge-cloud)"/><rect transform="matrix(-1 0 0 -1 0 0)" width="52" height="52" fill="url(#halo-corner-cloud)"/></g>
+      <rect fill="#0b1020" fill-opacity=".2" x="22" y="22" width="132" height="92"/><rect transform="matrix(1 0 0 1 154 22)" width="32" height="92" fill="url(#shadow-edge-cloud)"/><rect transform="matrix(0 1 1 0 22 114)" width="32" height="132" fill="url(#shadow-edge-cloud)"/><rect transform="matrix(1 0 0 1 154 114)" width="32" height="32" fill="url(#shadow-corner-cloud)"/><rect transform="matrix(-1 0 0 1 22 114)" width="32" height="32" fill="url(#shadow-corner-cloud)"/><rect transform="matrix(1 0 0 -1 154 22)" width="32" height="32" fill="url(#shadow-corner-cloud)"/><rect transform="matrix(-1 0 0 1 22 22)" width="32" height="92" fill="url(#shadow-edge-cloud)"/><rect transform="matrix(0 -1 1 0 22 22)" width="32" height="132" fill="url(#shadow-edge-cloud)"/><rect transform="matrix(-1 0 0 -1 22 22)" width="32" height="32" fill="url(#shadow-corner-cloud)"/>
+    </g>
+    <g class="art">
+    <circle class="cloud-line" cx="-8.66" cy="-6" r="31.8422"/><circle class="cloud-line" cx="25.98" cy="12" r="28.1681"/><circle class="cloud-line" cx="60.62" cy="34" r="31.8422"/><circle class="cloud-line" cx="-51.96" cy="5" r="23.269299999999998"/><circle class="cloud-line" cx="-17.32" cy="22" r="24.494"/><circle class="cloud-line" cx="17.32" cy="45" r="23.269299999999998"/><circle class="cloud-line" cx="51.96" cy="62" r="24.494"/>
+    <circle cx="-8.66" cy="-6" r="31.8422" fill="url(#cloud-puff-cloud)"/><circle cx="25.98" cy="12" r="28.1681" fill="url(#cloud-puff-cloud)"/><circle cx="60.62" cy="34" r="31.8422" fill="url(#cloud-puff-cloud)"/><circle cx="-51.96" cy="5" r="23.269299999999998" fill="url(#cloud-puff-cloud)"/><circle cx="-17.32" cy="22" r="24.494" fill="url(#cloud-puff-cloud)"/><circle cx="17.32" cy="45" r="23.269299999999998" fill="url(#cloud-puff-cloud)"/><circle cx="51.96" cy="62" r="24.494" fill="url(#cloud-puff-cloud)"/>
+    <circle cx="-17.32" cy="28" r="5.5" fill="#191d25" stroke="#4b5467"/>
+    <circle cx="-17.32" cy="28" r="2.6" class="led status pulse"/></g></g><g data-status="ok" transform="translate(-159.3 168)" style="--_phase: -0.6s"><defs>
+  <pattern id="slots-lb" width="8" height="10" patternUnits="userSpaceOnUse">
+    <rect width="4" height="10" fill="#0d1015"/>
+  </pattern>
+  <radialGradient id="glow-status" r=".875" style="color: var(--_color)">
+    <stop offset=".571" stop-color="currentColor" stop-opacity=".42"/>
+    <stop offset=".77" stop-color="currentColor" stop-opacity=".18"/>
+    <stop offset="1" stop-color="currentColor" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="glow-disk" r=".875" style="color: var(--_disk)">
+    <stop offset=".571" stop-color="currentColor" stop-opacity=".42"/>
+    <stop offset=".77" stop-color="currentColor" stop-opacity=".18"/>
+    <stop offset="1" stop-color="currentColor" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="glow-fault" r=".875" style="color: var(--_fault)">
+    <stop offset=".571" stop-color="currentColor" stop-opacity=".42"/>
+    <stop offset=".77" stop-color="currentColor" stop-opacity=".18"/>
+    <stop offset="1" stop-color="currentColor" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="glow-blue" r=".875" style="color: #38bdf8">
+    <stop offset=".571" stop-color="currentColor" stop-opacity=".42"/>
+    <stop offset=".77" stop-color="currentColor" stop-opacity=".18"/>
+    <stop offset="1" stop-color="currentColor" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="shadow-edge-lb" gradientUnits="userSpaceOnUse" x2="32"><stop offset="0" stop-color="#0b1020" stop-opacity="0.2"/><stop offset="0.33" stop-color="#0b1020" stop-opacity="0.152"/><stop offset="0.67" stop-color="#0b1020" stop-opacity="0.048"/><stop offset="1" stop-color="#0b1020" stop-opacity="0"/></linearGradient>
+  <radialGradient id="shadow-corner-lb" href="#shadow-edge-lb" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="32"/>
+  <linearGradient id="halo-edge-lb" class="halo-fade" gradientUnits="userSpaceOnUse" x2="52"><stop offset="0" stop-opacity="0.55"/><stop offset="0.25" stop-opacity="0.448"/><stop offset="0.5" stop-opacity="0.248"/><stop offset="0.75" stop-opacity="0.07"/><stop offset="1" stop-opacity="0"/></linearGradient>
+  <radialGradient id="halo-corner-lb" href="#halo-edge-lb" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="52"/>
+  <g id="port-lb">
+    <rect width="10" height="8" rx="1" fill="#0d1015" stroke="#394151"/>
+    <rect x="3" y="3" width="4" height="3" fill="#1b2029"/>
+  </g>
+  <g id="port-leds-lb"><circle cx="2" cy="1.8" r="1"/><circle cx="8" cy="1.8" r="1"/></g>
+    <g id="load-balancer-fanout-lb">
+      <circle cx="4" cy="22" r="4.5" fill="#46a4b4"/>
+      <path d="M4 22H50M24 22V10Q24 4 30 4H50M24 22V34Q24 40 30 40H50" fill="none" stroke="#46a4b4" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M49 -1L59 4L49 9ZM49 17L59 22L49 27ZM49 35L59 40L49 45Z" fill="#46a4b4"/>
+    </g>
+  </defs>
+    <g class="ground" shape-rendering="crispEdges" transform="matrix(.866 .5 -.866 .5 0 0)">
+      <g class="halo"><rect transform="matrix(1 0 0 1 200 0)" width="52" height="120" fill="url(#halo-edge-lb)"/><rect transform="matrix(0 1 1 0 0 120)" width="52" height="200" fill="url(#halo-edge-lb)"/><rect transform="matrix(1 0 0 1 200 120)" width="52" height="52" fill="url(#halo-corner-lb)"/><rect transform="matrix(-1 0 0 1 0 120)" width="52" height="52" fill="url(#halo-corner-lb)"/><rect transform="matrix(1 0 0 -1 200 0)" width="52" height="52" fill="url(#halo-corner-lb)"/><rect transform="matrix(-1 0 0 1 0 0)" width="52" height="120" fill="url(#halo-edge-lb)"/><rect transform="matrix(0 -1 1 0 0 0)" width="52" height="200" fill="url(#halo-edge-lb)"/><rect transform="matrix(-1 0 0 -1 0 0)" width="52" height="52" fill="url(#halo-corner-lb)"/></g>
+      <rect transform="matrix(1 0 0 1 194 22)" width="32" height="92" fill="url(#shadow-edge-lb)"/><rect transform="matrix(0 1 1 0 22 114)" width="32" height="172" fill="url(#shadow-edge-lb)"/><rect transform="matrix(1 0 0 1 194 114)" width="32" height="32" fill="url(#shadow-corner-lb)"/><rect transform="matrix(-1 0 0 1 22 114)" width="32" height="32" fill="url(#shadow-corner-lb)"/><rect transform="matrix(1 0 0 -1 194 22)" width="32" height="32" fill="url(#shadow-corner-lb)"/>
+    </g>
+    <g class="cover">
+      <g transform="matrix(.866 .5 -.866 .5 0 -60)">
+      <rect width="200" height="120" fill="#3b4352"/>
+      <rect x="10" y="10" width="180" height="100" rx="3" fill="none" stroke="#4b5467" stroke-width="1.5"/>
+      <use href="#load-balancer-fanout-lb" x="24" y="18"/>
+      <rect x="88" y="72" width="88" height="28" rx="3" fill="#e2e8f0"/>
+  <text x="100" y="91" class="label">lb</text></g>
+      <g transform="matrix(.866 .5 0 1 -103.92 0)">
+      <rect width="200" height="60" fill="#252b36"/>
+      
+  <rect width="16" height="60" fill="#2f3644"/>
+  <rect x="184" width="16" height="60" fill="#2f3644"/>
+  <circle cx="8" cy="14" r="3" class="screw"/><circle cx="8" cy="46" r="3" class="screw"/><circle cx="192" cy="14" r="3" class="screw"/><circle cx="192" cy="46" r="3" class="screw"/>
+      
+  <circle cx="25" cy="30" r="2.5" class="led blue"/>
+  <circle cx="38" cy="30" r="2.2" class="led status pulse"/>
+  <circle cx="49" cy="30" r="2.2" class="led activity" style="--period: 7.2s; --delay: -0.8s"/>
+  <circle cx="60" cy="30" r="2.2" class="fault"/>
+      <use href="#port-lb" x="68" y="20"/><use href="#port-leds-lb" x="68" y="20" class="led activity" style="--period: 2.4s; --delay: -0.0s"/><use href="#port-lb" x="82" y="20"/><use href="#port-leds-lb" x="82" y="20" class="led activity" style="--period: 0s"/><use href="#port-lb" x="68" y="32"/><use href="#port-leds-lb" x="68" y="32" class="led activity" style="--period: 4.8s; --delay: -0.4s"/><use href="#port-lb" x="82" y="32"/><use href="#port-leds-lb" x="82" y="32" class="led activity" style="--period: 0s"/><use href="#port-lb" x="108" y="20"/><use href="#port-leds-lb" x="108" y="20" class="led activity" style="--period: 7.2s; --delay: -0.8s"/><use href="#port-lb" x="122" y="20"/><use href="#port-leds-lb" x="122" y="20" class="led activity" style="--period: 0s"/><use href="#port-lb" x="108" y="32"/><use href="#port-leds-lb" x="108" y="32" class="led activity" style="--period: 2.4s; --delay: -1.2s"/><use href="#port-lb" x="122" y="32"/><use href="#port-leds-lb" x="122" y="32" class="led activity" style="--period: 0s"/>
+      <rect x="142" y="21" width="36" height="18" rx="2" fill="#0d1015" stroke="#394151"/>
+      <path d="M147 27h20M147 33h14" stroke="#46a4b4" stroke-width="2"/></g>
+      <g transform="matrix(.866 -.5 0 1 69.28 100)">
+      <rect width="120" height="60" fill="#1d222b"/>
+      <rect x="8" y="14" width="20" height="32" fill="url(#slots-lb)"/><rect x="48" y="14" width="20" height="32" fill="url(#slots-lb)"/><rect x="88" y="14" width="20" height="32" fill="url(#slots-lb)"/></g>
+    </g>
+    <!-- Visible edges, always drawn. -->
+    <rect class="edge" transform="matrix(.866 .5 -.866 .5 0 -60)" width="200" height="120"/>
+    <rect class="edge" transform="matrix(.866 .5 0 1 -103.92 0)" width="200" height="60"/>
+    <rect class="edge" transform="matrix(.866 -.5 0 1 69.28 100)" width="120" height="60"/></g><g data-status="warn" transform="translate(138.6 272)" style="--_phase: -1.7s"><defs>
+  <pattern id="perforation-web2" width="6" height="6" patternUnits="userSpaceOnUse">
+    <circle cx="3" cy="3" r="1.3" fill="#0d1015"/>
+  </pattern>
+  <pattern id="slots-web2" width="8" height="10" patternUnits="userSpaceOnUse">
+    <rect width="4" height="10" fill="#0d1015"/>
+  </pattern>
+  <radialGradient id="glow-status" r=".875" style="color: var(--_color)">
+    <stop offset=".571" stop-color="currentColor" stop-opacity=".42"/>
+    <stop offset=".77" stop-color="currentColor" stop-opacity=".18"/>
+    <stop offset="1" stop-color="currentColor" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="glow-disk" r=".875" style="color: var(--_disk)">
+    <stop offset=".571" stop-color="currentColor" stop-opacity=".42"/>
+    <stop offset=".77" stop-color="currentColor" stop-opacity=".18"/>
+    <stop offset="1" stop-color="currentColor" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="glow-fault" r=".875" style="color: var(--_fault)">
+    <stop offset=".571" stop-color="currentColor" stop-opacity=".42"/>
+    <stop offset=".77" stop-color="currentColor" stop-opacity=".18"/>
+    <stop offset="1" stop-color="currentColor" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="glow-blue" r=".875" style="color: #38bdf8">
+    <stop offset=".571" stop-color="currentColor" stop-opacity=".42"/>
+    <stop offset=".77" stop-color="currentColor" stop-opacity=".18"/>
+    <stop offset="1" stop-color="currentColor" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="shadow-edge-web2" gradientUnits="userSpaceOnUse" x2="32"><stop offset="0" stop-color="#0b1020" stop-opacity="0.2"/><stop offset="0.33" stop-color="#0b1020" stop-opacity="0.152"/><stop offset="0.67" stop-color="#0b1020" stop-opacity="0.048"/><stop offset="1" stop-color="#0b1020" stop-opacity="0"/></linearGradient>
+  <radialGradient id="shadow-corner-web2" href="#shadow-edge-web2" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="32"/>
+  <linearGradient id="halo-edge-web2" class="halo-fade" gradientUnits="userSpaceOnUse" x2="52"><stop offset="0" stop-opacity="0.55"/><stop offset="0.25" stop-opacity="0.448"/><stop offset="0.5" stop-opacity="0.248"/><stop offset="0.75" stop-opacity="0.07"/><stop offset="1" stop-opacity="0"/></linearGradient>
+  <radialGradient id="halo-corner-web2" href="#halo-edge-web2" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="52"/>
+    <g id="server-bay-web2">
+      <rect width="38" height="30" rx="2" fill="#191d25" stroke="#394151"/>
+      <path d="M5 7h20M5 11h20M5 15h20" stroke="#2b313d" stroke-width="1.6"/>
+      <rect x="5" y="21" width="20" height="5" rx="1" fill="#343c4a"/>
+    </g>
+  </defs>
+    <g class="ground" shape-rendering="crispEdges" transform="matrix(.866 .5 -.866 .5 0 0)">
+      <g class="halo"><rect transform="matrix(1 0 0 1 160 0)" width="52" height="160" fill="url(#halo-edge-web2)"/><rect transform="matrix(0 1 1 0 0 160)" width="52" height="160" fill="url(#halo-edge-web2)"/><rect transform="matrix(1 0 0 1 160 160)" width="52" height="52" fill="url(#halo-corner-web2)"/><rect transform="matrix(-1 0 0 1 0 160)" width="52" height="52" fill="url(#halo-corner-web2)"/><rect transform="matrix(1 0 0 -1 160 0)" width="52" height="52" fill="url(#halo-corner-web2)"/><rect transform="matrix(-1 0 0 1 0 0)" width="52" height="160" fill="url(#halo-edge-web2)"/><rect transform="matrix(0 -1 1 0 0 0)" width="52" height="160" fill="url(#halo-edge-web2)"/><rect transform="matrix(-1 0 0 -1 0 0)" width="52" height="52" fill="url(#halo-corner-web2)"/></g>
+      <rect transform="matrix(1 0 0 1 154 22)" width="32" height="132" fill="url(#shadow-edge-web2)"/><rect transform="matrix(0 1 1 0 22 154)" width="32" height="132" fill="url(#shadow-edge-web2)"/><rect transform="matrix(1 0 0 1 154 154)" width="32" height="32" fill="url(#shadow-corner-web2)"/><rect transform="matrix(-1 0 0 1 22 154)" width="32" height="32" fill="url(#shadow-corner-web2)"/><rect transform="matrix(1 0 0 -1 154 22)" width="32" height="32" fill="url(#shadow-corner-web2)"/>
+    </g>
+    <g class="cover">
+      <g transform="matrix(.866 .5 -.866 .5 0 -100)">
+      <rect width="160" height="160" fill="#3b4352"/>
+      <rect x="10" y="10" width="140" height="140" rx="3" fill="none" stroke="#4b5467" stroke-width="1.5"/>
+      <rect x="26" y="26" width="96" height="54" fill="url(#perforation-web2)"/>
+      <rect x="48" y="112" width="88" height="28" rx="3" fill="#e2e8f0"/>
+  <text x="60" y="131" class="label">web-02</text></g>
+      <g transform="matrix(.866 .5 0 1 -138.56 -20)">
+      <rect width="160" height="100" fill="#252b36"/>
+      
+  <rect width="16" height="100" fill="#2f3644"/>
+  <rect x="144" width="16" height="100" fill="#2f3644"/>
+  <circle cx="8" cy="14" r="3" class="screw"/><circle cx="8" cy="86" r="3" class="screw"/><circle cx="152" cy="14" r="3" class="screw"/><circle cx="152" cy="86" r="3" class="screw"/>
+      <use href="#server-bay-web2" x="20" y="18"/><circle cx="52" cy="26" r="2" class="led activity" style="--period: 2.4s; --delay: -0.0s"/><circle cx="52" cy="33" r="2" class="fault"/><use href="#server-bay-web2" x="20" y="52"/><circle cx="52" cy="60" r="2" class="led activity" style="--period: 0s"/><circle cx="52" cy="67" r="2" class="fault"/>
+      <rect x="68" y="18" width="40" height="64" fill="url(#perforation-web2)" stroke="#394151"/>
+      
+  <circle cx="126" cy="27" r="6" fill="#191d25" stroke="#4b5467"/>
+  <circle cx="126" cy="27" r="2.5" class="led blue"/>
+  <circle cx="126" cy="45" r="2.2" class="led status pulse"/>
+  <circle cx="126" cy="55" r="2.2" class="led activity" style="--period: 2.4s; --delay: -0.0s"/>
+  <circle cx="126" cy="65" r="2.2" class="fault"/>
+  <rect x="121" y="74" width="10" height="5" rx="1" fill="#0d1015" stroke="#4b5467"/></g>
+      <g transform="matrix(.866 -.5 0 1 0 60)">
+      <rect width="160" height="100" fill="#1d222b"/>
+      <path d="M0 10H160" stroke="#2b313c" stroke-width="1.5"/>
+      <rect y="80" width="160" height="10" fill="#282e39"/>
+      <rect x="8" y="22" width="20" height="48" fill="url(#slots-web2)"/><circle cx="20" cy="85" r="2" class="screw"/><rect x="48" y="22" width="20" height="48" fill="url(#slots-web2)"/><circle cx="60" cy="85" r="2" class="screw"/><rect x="88" y="22" width="20" height="48" fill="url(#slots-web2)"/><circle cx="100" cy="85" r="2" class="screw"/><rect x="128" y="22" width="20" height="48" fill="url(#slots-web2)"/><circle cx="140" cy="85" r="2" class="screw"/></g>
+    </g>
+    <!-- Visible edges, always drawn. -->
+    <rect class="edge" transform="matrix(.866 .5 -.866 .5 0 -100)" width="160" height="160"/>
+    <rect class="edge" transform="matrix(.866 .5 0 1 -138.56 -20)" width="160" height="100"/>
+    <rect class="edge" transform="matrix(.866 -.5 0 1 0 60)" width="160" height="100"/></g><g data-status="ok" transform="translate(401.8 332)" style="--_phase: -1.4s"><defs>
+  <radialGradient id="glow-status" r=".875" style="color: var(--_color)">
+    <stop offset=".571" stop-color="currentColor" stop-opacity=".42"/>
+    <stop offset=".77" stop-color="currentColor" stop-opacity=".18"/>
+    <stop offset="1" stop-color="currentColor" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="glow-disk" r=".875" style="color: var(--_disk)">
+    <stop offset=".571" stop-color="currentColor" stop-opacity=".42"/>
+    <stop offset=".77" stop-color="currentColor" stop-opacity=".18"/>
+    <stop offset="1" stop-color="currentColor" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="glow-fault" r=".875" style="color: var(--_fault)">
+    <stop offset=".571" stop-color="currentColor" stop-opacity=".42"/>
+    <stop offset=".77" stop-color="currentColor" stop-opacity=".18"/>
+    <stop offset="1" stop-color="currentColor" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="glow-blue" r=".875" style="color: #38bdf8">
+    <stop offset=".571" stop-color="currentColor" stop-opacity=".42"/>
+    <stop offset=".77" stop-color="currentColor" stop-opacity=".18"/>
+    <stop offset="1" stop-color="currentColor" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="shadow-edge-cache" gradientUnits="userSpaceOnUse" x2="32"><stop offset="0" stop-color="#0b1020" stop-opacity="0.2"/><stop offset="0.33" stop-color="#0b1020" stop-opacity="0.152"/><stop offset="0.67" stop-color="#0b1020" stop-opacity="0.048"/><stop offset="1" stop-color="#0b1020" stop-opacity="0"/></linearGradient>
+  <radialGradient id="shadow-corner-cache" href="#shadow-edge-cache" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="32"/>
+  <linearGradient id="halo-edge-cache" class="halo-fade" gradientUnits="userSpaceOnUse" x2="52"><stop offset="0" stop-opacity="0.55"/><stop offset="0.25" stop-opacity="0.448"/><stop offset="0.5" stop-opacity="0.248"/><stop offset="0.75" stop-opacity="0.07"/><stop offset="1" stop-opacity="0"/></linearGradient>
+  <radialGradient id="halo-corner-cache" href="#halo-edge-cache" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="52"/>
+  <linearGradient id="cylinder-shade-cache" x1="0" x2="1" y1="0" y2="0">
+    <stop offset="0" stop-color="#ffffff" stop-opacity=".1"/>
+    <stop offset=".45" stop-color="#ffffff" stop-opacity="0"/>
+    <stop offset="1" stop-color="#000000" stop-opacity=".3"/>
+  </linearGradient></defs>
+    <g class="ground" shape-rendering="crispEdges" transform="matrix(.866 .5 -.866 .5 0 0)">
+      <g class="halo"><rect class="halo-core" fill-opacity=".55" x="0" y="0" width="120" height="120"/><rect transform="matrix(1 0 0 1 120 0)" width="52" height="120" fill="url(#halo-edge-cache)"/><rect transform="matrix(0 1 1 0 0 120)" width="52" height="120" fill="url(#halo-edge-cache)"/><rect transform="matrix(1 0 0 1 120 120)" width="52" height="52" fill="url(#halo-corner-cache)"/><rect transform="matrix(-1 0 0 1 0 120)" width="52" height="52" fill="url(#halo-corner-cache)"/><rect transform="matrix(1 0 0 -1 120 0)" width="52" height="52" fill="url(#halo-corner-cache)"/><rect transform="matrix(-1 0 0 1 0 0)" width="52" height="120" fill="url(#halo-edge-cache)"/><rect transform="matrix(0 -1 1 0 0 0)" width="52" height="120" fill="url(#halo-edge-cache)"/><rect transform="matrix(-1 0 0 -1 0 0)" width="52" height="52" fill="url(#halo-corner-cache)"/></g>
+      <rect fill="#0b1020" fill-opacity=".2" x="22" y="22" width="92" height="92"/><rect transform="matrix(1 0 0 1 114 22)" width="32" height="92" fill="url(#shadow-edge-cache)"/><rect transform="matrix(0 1 1 0 22 114)" width="32" height="92" fill="url(#shadow-edge-cache)"/><rect transform="matrix(1 0 0 1 114 114)" width="32" height="32" fill="url(#shadow-corner-cache)"/><rect transform="matrix(-1 0 0 1 22 114)" width="32" height="32" fill="url(#shadow-corner-cache)"/><rect transform="matrix(1 0 0 -1 114 22)" width="32" height="32" fill="url(#shadow-corner-cache)"/><rect transform="matrix(-1 0 0 1 22 22)" width="32" height="92" fill="url(#shadow-edge-cache)"/><rect transform="matrix(0 -1 1 0 22 22)" width="32" height="92" fill="url(#shadow-edge-cache)"/><rect transform="matrix(-1 0 0 -1 22 22)" width="32" height="32" fill="url(#shadow-corner-cache)"/>
+    </g>
+    <g class="art">
+  <path d="M-73.488 0V60A73.488 42.432 0 0 0 73.488 60V0Z" fill="#252b36"/>
+  <path d="M-73.488 0V60A73.488 42.432 0 0 0 73.488 60V0Z" fill="url(#cylinder-shade-cache)"/>
+  <ellipse cx="0" cy="0" rx="73.488" ry="42.432" fill="#3b4352"/>
+  <path class="edge" d="M-73.488 0V60A73.488 42.432 0 0 0 73.488 60V0"/>
+  <ellipse class="edge" cx="0" cy="0" rx="73.488" ry="42.432"/>
+      <g fill="#11151b" stroke="#394151"><path d="M-19.955441303030824,86.8376259857614A73.488 42.432 0 0 0 -11.587044564904772,87.90123688596907L-11.587044564904772,95.90123688596907A73.488 42.432 0 0 1 -19.955441303030824,94.8376259857614Z"/><path d="M11.587044564904772,87.90123688596907A73.488 42.432 0 0 0 19.955441303030824,86.8376259857614L19.955441303030824,94.8376259857614A73.488 42.432 0 0 1 11.587044564904772,95.90123688596907Z"/><path d="M-34.69337531320856,83.40581321033741A73.488 42.432 0 0 0 -26.916635617475464,85.48329941298331L-26.916635617475464,93.48329941298331A73.488 42.432 0 0 1 -34.69337531320856,91.40581321033741Z"/><path d="M26.916635617475464,85.48329941298331A73.488 42.432 0 0 0 34.69337531320856,83.40581321033741L34.69337531320856,91.40581321033741A73.488 42.432 0 0 1 26.916635617475464,93.48329941298331Z"/><path d="M-47.80900951477646,78.2248640921915A73.488 42.432 0 0 0 -40.98757563317151,81.21908009216074L-40.98757563317151,89.21908009216074A73.488 42.432 0 0 1 -47.80900951477646,86.2248640921915Z"/><path d="M40.98757563317151,81.21908009216074A73.488 42.432 0 0 0 47.80900951477646,78.2248640921915L47.80900951477646,86.2248640921915A73.488 42.432 0 0 1 40.98757563317151,89.21908009216074Z"/><path d="M-58.68904264595446,71.5370454239578A73.488 42.432 0 0 0 -53.14189221558173,75.30797843783472L-53.14189221558173,83.30797843783472A73.488 42.432 0 0 1 -58.68904264595446,79.5370454239578Z"/><path d="M53.14189221558173,75.30797843783472A73.488 42.432 0 0 0 58.68904264595446,71.5370454239578L58.68904264595446,79.5370454239578A73.488 42.432 0 0 1 53.14189221558173,83.30797843783472Z"/><path d="M-66.824712572559,63.65508685063466A73.488 42.432 0 0 0 -62.81123635607217,68.02640396611355L-62.81123635607217,76.02640396611355A73.488 42.432 0 0 1 -66.824712572559,71.65508685063466Z"/><path d="M62.81123635607217,68.02640396611355A73.488 42.432 0 0 0 66.824712572559,63.65508685063466L66.824712572559,71.65508685063466A73.488 42.432 0 0 1 62.81123635607217,76.02640396611355Z"/><path d="M-19.955441303030824,66.8376259857614A73.488 42.432 0 0 0 -11.587044564904772,67.90123688596907L-11.587044564904772,75.90123688596907A73.488 42.432 0 0 1 -19.955441303030824,74.8376259857614Z"/><path d="M11.587044564904772,67.90123688596907A73.488 42.432 0 0 0 19.955441303030824,66.8376259857614L19.955441303030824,74.8376259857614A73.488 42.432 0 0 1 11.587044564904772,75.90123688596907Z"/><path d="M-34.69337531320856,63.40581321033742A73.488 42.432 0 0 0 -26.916635617475464,65.48329941298331L-26.916635617475464,73.48329941298331A73.488 42.432 0 0 1 -34.69337531320856,71.40581321033741Z"/><path d="M26.916635617475464,65.48329941298331A73.488 42.432 0 0 0 34.69337531320856,63.40581321033742L34.69337531320856,71.40581321033741A73.488 42.432 0 0 1 26.916635617475464,73.48329941298331Z"/><path d="M-47.80900951477646,58.22486409219149A73.488 42.432 0 0 0 -40.98757563317151,61.21908009216073L-40.98757563317151,69.21908009216074A73.488 42.432 0 0 1 -47.80900951477646,66.2248640921915Z"/><path d="M40.98757563317151,61.21908009216073A73.488 42.432 0 0 0 47.80900951477646,58.22486409219149L47.80900951477646,66.2248640921915A73.488 42.432 0 0 1 40.98757563317151,69.21908009216074Z"/><path d="M-58.68904264595446,51.53704542395781A73.488 42.432 0 0 0 -53.14189221558173,55.30797843783472L-53.14189221558173,63.30797843783472A73.488 42.432 0 0 1 -58.68904264595446,59.53704542395781Z"/><path d="M53.14189221558173,55.30797843783472A73.488 42.432 0 0 0 58.68904264595446,51.53704542395781L58.68904264595446,59.53704542395781A73.488 42.432 0 0 1 53.14189221558173,63.30797843783472Z"/><path d="M-66.824712572559,43.65508685063466A73.488 42.432 0 0 0 -62.81123635607217,48.02640396611355L-62.81123635607217,56.02640396611355A73.488 42.432 0 0 1 -66.824712572559,51.65508685063466Z"/><path d="M62.81123635607217,48.02640396611355A73.488 42.432 0 0 0 66.824712572559,43.65508685063466L66.824712572559,51.65508685063466A73.488 42.432 0 0 1 62.81123635607217,56.02640396611355Z"/><path d="M-19.955441303030824,46.8376259857614A73.488 42.432 0 0 0 -11.587044564904772,47.90123688596907L-11.587044564904772,55.90123688596907A73.488 42.432 0 0 1 -19.955441303030824,54.8376259857614Z"/><path d="M11.587044564904772,47.90123688596907A73.488 42.432 0 0 0 19.955441303030824,46.8376259857614L19.955441303030824,54.8376259857614A73.488 42.432 0 0 1 11.587044564904772,55.90123688596907Z"/><path d="M-34.69337531320856,43.40581321033742A73.488 42.432 0 0 0 -26.916635617475464,45.48329941298332L-26.916635617475464,53.48329941298332A73.488 42.432 0 0 1 -34.69337531320856,51.40581321033742Z"/><path d="M26.916635617475464,45.48329941298332A73.488 42.432 0 0 0 34.69337531320856,43.40581321033742L34.69337531320856,51.40581321033742A73.488 42.432 0 0 1 26.916635617475464,53.48329941298332Z"/><path d="M-47.80900951477646,38.22486409219149A73.488 42.432 0 0 0 -40.98757563317151,41.21908009216073L-40.98757563317151,49.21908009216073A73.488 42.432 0 0 1 -47.80900951477646,46.22486409219149Z"/><path d="M40.98757563317151,41.21908009216073A73.488 42.432 0 0 0 47.80900951477646,38.22486409219149L47.80900951477646,46.22486409219149A73.488 42.432 0 0 1 40.98757563317151,49.21908009216073Z"/><path d="M-58.68904264595446,31.537045423957803A73.488 42.432 0 0 0 -53.14189221558173,35.30797843783472L-53.14189221558173,43.30797843783472A73.488 42.432 0 0 1 -58.68904264595446,39.53704542395781Z"/><path d="M53.14189221558173,35.30797843783472A73.488 42.432 0 0 0 58.68904264595446,31.537045423957803L58.68904264595446,39.53704542395781A73.488 42.432 0 0 1 53.14189221558173,43.30797843783472Z"/><path d="M-66.824712572559,23.655086850634664A73.488 42.432 0 0 0 -62.81123635607217,28.02640396611355L-62.81123635607217,36.02640396611355A73.488 42.432 0 0 1 -66.824712572559,31.655086850634664Z"/><path d="M62.81123635607217,28.02640396611355A73.488 42.432 0 0 0 66.824712572559,23.655086850634664L66.824712572559,31.655086850634664A73.488 42.432 0 0 1 62.81123635607217,36.02640396611355Z"/></g>
+      <path d="M-73.488 40A73.488 42.432 0 0 0 73.488 40M-73.488 20A73.488 42.432 0 0 0 73.488 20" fill="none" stroke="#22d3ee" stroke-width="5" stroke-opacity=".2"/>
+      <path d="M-73.488 40A73.488 42.432 0 0 0 73.488 40M-73.488 20A73.488 42.432 0 0 0 73.488 20" fill="none" stroke="#22d3ee" stroke-width="1.5" stroke-opacity=".8"/>
+      <circle cx="0" cy="92.432" r="2.4" class="led activity" style="--period: 2.4s; --delay: -0.0s"/><circle cx="0" cy="72.432" r="2.4" class="led activity" style="--period: 7.2s; --delay: -1.4s"/><circle cx="0" cy="52.432" r="2.4" class="led status pulse"/>
+      <g transform="matrix(.866 .5 -.866 .5 0 -60)">
+        <circle cx="60" cy="60" r="54" fill="none" stroke="#4b5467" stroke-width="1.5"/>
+        <g transform="translate(60 60) scale(1)" text-anchor="middle">
+          <path d="M5 -20L-11 4H0L-5 20L11 -4H0Z" transform="translate(0 0)" fill="#22d3ee" stroke="#22d3ee" stroke-opacity=".22" stroke-width="3.5" stroke-linejoin="round" paint-order="stroke"/>
+          
+        </g>
+      </g></g></g></g>
+</g>
+<rect x=".75" y=".75" width="1278.5" height="398.5" rx="21.5" fill="none" stroke="#dce4ee" stroke-width="1.5"/>
+<g transform="translate(72 70) scale(7.1429) translate(3.0178838324886477 1.06)"><line x1="0.000" y1="0.450" x2="1.039" y2="2.250" stroke="#5b9bd5" stroke-width="0.26" stroke-linecap="round" fill="none"/><line x1="-2.078" y1="1.650" x2="1.039" y2="2.250" stroke="#5b9bd5" stroke-width="0.26" stroke-linecap="round" fill="none"/><polygon points="-0.779,0.45 0,0.9 0,0 -0.779,-0.45" fill="#2e5f8a"/><polygon points="0.779,0.45 0,0.9 0,0 0.779,-0.45" fill="#417cb8"/><polygon points="0,-0.9 0.779,-0.45 0,0 -0.779,-0.45" fill="#5b9bd5"/><polygon points="-2.858,1.65 -2.078,2.1 -2.078,1.2 -2.858,0.75" fill="#2e5f8a"/><polygon points="-1.299,1.65 -2.078,2.1 -2.078,1.2 -1.299,0.75" fill="#417cb8"/><polygon points="-2.078,0.3 -1.299,0.75 -2.078,1.2 -2.858,0.75" fill="#5b9bd5"/><polygon points="0.26,2.25 1.039,2.7 1.039,2.46 0.26,2.01" fill="#273244" stroke="#8796ab" stroke-width=".035" stroke-linejoin="round"/><polygon points="1.819,2.25 1.039,2.7 1.039,2.46 1.819,2.01" fill="#3a475a" stroke="#8796ab" stroke-width=".035" stroke-linejoin="round"/><polygon points="1.039,1.56 1.819,2.01 1.039,2.46 0.26,2.01" fill="#56657a" stroke="#8796ab" stroke-width=".035" stroke-linejoin="round"/><polygon points="1.335,2.457 1.226,2.52 1.226,2.432 1.335,2.369" fill="#34d399"/><polygon points="0.26,1.94 1.039,2.39 1.039,2.15 0.26,1.7" fill="#273244" stroke="#8796ab" stroke-width=".035" stroke-linejoin="round"/><polygon points="1.819,1.94 1.039,2.39 1.039,2.15 1.819,1.7" fill="#3a475a" stroke="#8796ab" stroke-width=".035" stroke-linejoin="round"/><polygon points="1.039,1.25 1.819,1.7 1.039,2.15 0.26,1.7" fill="#56657a" stroke="#8796ab" stroke-width=".035" stroke-linejoin="round"/><polygon points="1.335,2.147 1.226,2.21 1.226,2.122 1.335,2.059" fill="#34d399"/><polygon points="0.26,1.63 1.039,2.08 1.039,1.84 0.26,1.39" fill="#273244" stroke="#8796ab" stroke-width=".035" stroke-linejoin="round"/><polygon points="1.819,1.63 1.039,2.08 1.039,1.84 1.819,1.39" fill="#3a475a" stroke="#8796ab" stroke-width=".035" stroke-linejoin="round"/><polygon points="1.039,0.94 1.819,1.39 1.039,1.84 0.26,1.39" fill="#56657a" stroke="#8796ab" stroke-width=".035" stroke-linejoin="round"/><polygon points="1.335,1.837 1.226,1.9 1.226,1.812 1.335,1.749" fill="#34d399"/></g><text x="117.7" y="92" font-family="RHD" font-size="21" letter-spacing=".3"><tspan font-weight="800" fill="#2e6fb0">isoAtlas</tspan><tspan font-weight="400" fill="#5a6779">  /</tspan></text><g transform="translate(64 112) scale(46.1538) translate(1.0260254037844387 1.02)"><line x1="-0.866" y1="-0.050" x2="0.000" y2="0.450" stroke="#5b9bd5" stroke-width="0.26" stroke-linecap="round" fill="none"/><polygon points="-0.779,0.45 0,0.9 0,0.66 -0.779,0.21" fill="#273244" stroke="#8796ab" stroke-width=".035" stroke-linejoin="round"/><polygon points="0.779,0.45 0,0.9 0,0.66 0.779,0.21" fill="#3a475a" stroke="#8796ab" stroke-width=".035" stroke-linejoin="round"/><polygon points="0,-0.24 0.779,0.21 0,0.66 -0.779,0.21" fill="#56657a" stroke="#8796ab" stroke-width=".035" stroke-linejoin="round"/><polygon points="0.296,0.657 0.187,0.72 0.187,0.632 0.296,0.569" fill="#34d399"/><polygon points="-0.779,0.14 0,0.59 0,0.35 -0.779,-0.1" fill="#273244" stroke="#8796ab" stroke-width=".035" stroke-linejoin="round"/><polygon points="0.779,0.14 0,0.59 0,0.35 0.779,-0.1" fill="#3a475a" stroke="#8796ab" stroke-width=".035" stroke-linejoin="round"/><polygon points="0,-0.55 0.779,-0.1 0,0.35 -0.779,-0.1" fill="#56657a" stroke="#8796ab" stroke-width=".035" stroke-linejoin="round"/><polygon points="0.296,0.347 0.187,0.41 0.187,0.322 0.296,0.259" fill="#34d399"/><polygon points="-0.779,-0.17 0,0.28 0,0.04 -0.779,-0.41" fill="#273244" stroke="#8796ab" stroke-width=".035" stroke-linejoin="round"/><polygon points="0.779,-0.17 0,0.28 0,0.04 0.779,-0.41" fill="#3a475a" stroke="#8796ab" stroke-width=".035" stroke-linejoin="round"/><polygon points="0,-0.86 0.779,-0.41 0,0.04 -0.779,-0.41" fill="#56657a" stroke="#8796ab" stroke-width=".035" stroke-linejoin="round"/><polygon points="0.296,0.037 0.187,0.1 0.187,0.012 0.296,-0.051" fill="#34d399"/></g><text x="170.7" y="196" font-family="RHD" font-size="96" letter-spacing="-1.4"><tspan font-weight="400" fill="#141c27">iso</tspan><tspan font-weight="800" fill="#273244">stack</tspan></text><text x="68" y="258" font-family="RHT" font-size="27" ><tspan font-weight="500" fill="#141c27">Isometric infrastructure icons.</tspan></text><text x="68" y="292" font-family="RHT" font-size="20" ><tspan font-weight="400" fill="#5a6779">Web Components and static SVG, zero dependencies.</tspan></text><rect x="66" y="318" width="272.8" height="38" rx="9" fill="#ffffff" stroke="#d5dee9" stroke-width="1.5"/><text x="80" y="343" font-family="RHM" font-size="17" ><tspan font-weight="500" fill="#2e6fb0">&#60;iso-server</tspan><tspan font-weight="500" fill="#5a6779"> status=</tspan><tspan font-weight="500" fill="#15803d">&#34;ok&#34;</tspan><tspan font-weight="500" fill="#2e6fb0">&#62;</tspan></text>
+</svg>
