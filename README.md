@@ -78,12 +78,19 @@ With Vite, tell Vue that the `iso-` tags are custom elements, in `vite.config.js
 
 ## Components
 
-| Family | Elements |
-|---|---|
-| Compute and containers | `iso-server`, `iso-vps`, `iso-vm`, `iso-docker` (host), `iso-rack`, `iso-app` (a service inside a container) |
-| Network | `iso-switch`, `iso-router`, `iso-firewall`, `iso-load-balancer`, `iso-dns`, `iso-cloud` (internet) |
-| Data and storage | `iso-db`, `iso-cache`, `iso-queue`, `iso-bucket`, `iso-storage` (NAS) |
-| People and devices | `iso-user`, `iso-laptop`, `iso-phone`, `iso-desktop`, `iso-raspberry-pi` |
+| Tag | Preview | Tag | Preview |
+|---|:-:|---|:-:|
+| `<iso-server>` | <img src=".github/assets/components/server.svg" height="160" alt="Server"> | `<iso-vps>` | <img src=".github/assets/components/vps.svg" height="160" alt="VPS"> |
+| `<iso-vm>` | <img src=".github/assets/components/vm.svg" height="160" alt="Virtual machine"> | `<iso-docker>`<br>Docker host | <img src=".github/assets/components/docker.svg" height="160" alt="Docker host"> |
+| `<iso-rack>` | <img src=".github/assets/components/rack.svg" height="160" alt="Rack"> | `<iso-app>`<br>a service in a container | <img src=".github/assets/components/app.svg" height="160" alt="App"> |
+| `<iso-switch>` | <img src=".github/assets/components/switch.svg" height="160" alt="Switch"> | `<iso-router>` | <img src=".github/assets/components/router.svg" height="160" alt="Router"> |
+| `<iso-firewall>` | <img src=".github/assets/components/firewall.svg" height="160" alt="Firewall"> | `<iso-load-balancer>` | <img src=".github/assets/components/load-balancer.svg" height="160" alt="Load balancer"> |
+| `<iso-dns>` | <img src=".github/assets/components/dns.svg" height="160" alt="DNS"> | `<iso-cloud>`<br>internet | <img src=".github/assets/components/cloud.svg" height="160" alt="Cloud"> |
+| `<iso-db>` | <img src=".github/assets/components/db.svg" height="160" alt="Database"> | `<iso-cache>` | <img src=".github/assets/components/cache.svg" height="160" alt="Cache"> |
+| `<iso-queue>` | <img src=".github/assets/components/queue.svg" height="160" alt="Queue"> | `<iso-bucket>` | <img src=".github/assets/components/bucket.svg" height="160" alt="Bucket"> |
+| `<iso-storage>`<br>NAS | <img src=".github/assets/components/storage.svg" height="160" alt="Storage"> | `<iso-user>` | <img src=".github/assets/components/user.svg" height="160" alt="User"> |
+| `<iso-laptop>` | <img src=".github/assets/components/laptop.svg" height="160" alt="Laptop"> | `<iso-phone>` | <img src=".github/assets/components/phone.svg" height="160" alt="Phone"> |
+| `<iso-desktop>` | <img src=".github/assets/components/desktop.svg" height="160" alt="Desktop"> | `<iso-raspberry-pi>` | <img src=".github/assets/components/raspberry-pi.svg" height="160" alt="Raspberry Pi"> |
 
 Containers hold other elements:
 

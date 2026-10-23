@@ -6,6 +6,7 @@
 // - dist/isostack.isopack.json is an icon pack: the default size of every component in every status,
 //   in the collection format that isoAtlas and Isoflow load as is ({ id, name, icons: [...] }).
 // - custom-elements.json describes every tag for editors and docs tools.
+// - .github/assets/components/ holds the README previews: each component in its default size, status ok.
 import { mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import { draw, STATUSES } from './core/draw.js';
 
@@ -53,6 +54,11 @@ for (const model of models) {
   }
 }
 writeFileSync(new URL('isostack.isopack.json', dist), JSON.stringify(pack));
+
+const previews = new URL('.github/assets/components/', root);
+rmSync(previews, { recursive: true, force: true });
+mkdirSync(previews, { recursive: true });
+for (const model of models) writeFileSync(new URL(`${model.name}.svg`, previews), notice + draw(model, { status: 'ok' }));
 
 // custom-elements.json describes every tag in the standard Custom Elements Manifest format (schema
 // 2.1.0), read by editors, Storybook and docs tools: each tag lists its attributes with this model's

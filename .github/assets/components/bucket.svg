@@ -1,0 +1,116 @@
+<!--! isostack 0.1.0 by enixCode | MIT | https://github.com/enixCode/isostack -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-202.56 -184 405.12 408" width="405.12" height="408" data-status="ok" role="img" aria-label="Bucket, status ok">
+  <style>
+  /* Status goes through inherited variables (--_ prefix: internal): they are the only ones that
+     reach the copies made by use, such as the network ports. */
+  [data-status] {
+    --_color: var(--iso-ok, #22c55e); --_disk: var(--iso-ok, #22c55e); --_disk-anim: activity;
+    --_fault: #3a2d18; --_fault-anim: none;
+  }
+  [data-status="warn"] { --_color: var(--iso-warn, #f59e0b); --_fault: var(--_color); }
+  [data-status="down"] {
+    --_color: var(--iso-down, #ef4444); --_fault: var(--_color); --_fault-anim: pulse;
+    --_disk: #1f2a22; --_disk-anim: none;
+  }
+  /* Unknown: no data, so a grey status light and no disk activity. */
+  [data-status="unknown"] { --_color: var(--iso-unknown, #94a3b8); --_disk: #2b313d; --_disk-anim: none; }
+  /* Cover: the front faces fade out when the box is open, to show the inside. */
+  .cover { transition: opacity .4s; }
+  [data-open] .cover { opacity: .08; }
+  /* Inside: painted only while the box is open, and through the fade that follows closing it (the
+     switch to none waits for the end of the transition, where supported). */
+  .inside { display: none; transition: display .4s allow-discrete; }
+  [data-open] .inside { display: inline; }
+  .inside rect { stroke: #2a303b; vector-effect: non-scaling-stroke; }
+  .floor-grid { fill: none; stroke: #c3cad5; stroke-width: 1; vector-effect: non-scaling-stroke; }
+  /* Front edges fade partly with the cover; the back ones stay sharp. */
+  .edge { fill: none; stroke: #0f1218; stroke-width: 1.5; stroke-linejoin: round; vector-effect: non-scaling-stroke; transition: opacity .4s; }
+  [data-open] .edge { opacity: .35; }
+  /* Status halo on the ground, warn and down only, in the status color. */
+  .halo { display: none; }
+  [data-status="warn"] .halo, [data-status="down"] .halo { display: inline; }
+  .halo-core { fill: var(--_color); }
+  .halo-fade stop { stop-color: var(--_color); }
+  /* Lights glow without a filter: a 2 units wide band around the dot, under its flat core, painted by
+     a radial gradient of its own color (see glow below). */
+  .led, .fault { stroke-width: 4; paint-order: stroke; pointer-events: none; }
+  .led.blue { stroke: url(#glow-blue); }
+  .led.status { stroke: url(#glow-status); }
+  .led.activity { stroke: url(#glow-disk); }
+  .fault { stroke: url(#glow-fault); }
+  .blue { fill: #38bdf8; }
+  .status { fill: var(--_color); }
+  .screw { fill: #11151b; stroke: #4b5467; }
+  .label { font: 700 14px ui-monospace, Consolas, monospace; fill: #1e293b; }
+  /* Animations. A light is lit or dim, never half way, and every change of every light falls on one
+     shared beat of .2 s, so that the browser repaints a few times a second instead of at every frame.
+     --period (a whole number of 2.4 s turns; 0 keeps the light lit) and --delay (whole beats) place a
+     light in the pattern; the element shifts all its lights by --_phase, so that devices of a kind do
+     not blink together. --iso-speed speeds the beat up or down, --iso-animation: paused freezes it. */
+  .activity { fill: var(--_disk); animation: var(--_disk-anim) calc(var(--period, 2.4s) / var(--iso-speed, 1)) calc((var(--delay, 0s) + var(--_phase, 0s)) / var(--iso-speed, 1)) step-end infinite var(--iso-animation, running); }
+  .pulse { animation: pulse calc(2.4s / var(--iso-speed, 1)) calc(var(--_phase, 0s) / var(--iso-speed, 1)) step-end infinite var(--iso-animation, running); }
+  .fault { fill: var(--_fault); animation: var(--_fault-anim) calc(.8s / var(--iso-speed, 1)) step-end infinite var(--iso-animation, running); }
+  @keyframes activity { 0%, 25%, 66.667%, 83.333% { opacity: 1; } 16.667%, 50%, 75% { opacity: .15; } }
+  @keyframes pulse { 0% { opacity: 1; } 50% { opacity: .3; } }
+  /* An animated light is moved to a layer of its own, which would not fade with the cover: the lights of
+     an open cover stand still (the element also keeps them still through the fade that closes it). */
+  [data-open] .cover .activity, [data-open] .cover .pulse, [data-open] .cover .fault { animation: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .activity, .pulse, .fault { animation: none !important; }
+    .cover, .edge, .inside { transition: none; }
+  }
+</style>
+  <defs>
+  <radialGradient id="glow-status" r=".875" style="color: var(--_color)">
+    <stop offset=".571" stop-color="currentColor" stop-opacity=".42"/>
+    <stop offset=".77" stop-color="currentColor" stop-opacity=".18"/>
+    <stop offset="1" stop-color="currentColor" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="glow-disk" r=".875" style="color: var(--_disk)">
+    <stop offset=".571" stop-color="currentColor" stop-opacity=".42"/>
+    <stop offset=".77" stop-color="currentColor" stop-opacity=".18"/>
+    <stop offset="1" stop-color="currentColor" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="glow-fault" r=".875" style="color: var(--_fault)">
+    <stop offset=".571" stop-color="currentColor" stop-opacity=".42"/>
+    <stop offset=".77" stop-color="currentColor" stop-opacity=".18"/>
+    <stop offset="1" stop-color="currentColor" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="glow-blue" r=".875" style="color: #38bdf8">
+    <stop offset=".571" stop-color="currentColor" stop-opacity=".42"/>
+    <stop offset=".77" stop-color="currentColor" stop-opacity=".18"/>
+    <stop offset="1" stop-color="currentColor" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="shadow-edge" gradientUnits="userSpaceOnUse" x2="32"><stop offset="0" stop-color="#0b1020" stop-opacity="0.2"/><stop offset="0.33" stop-color="#0b1020" stop-opacity="0.152"/><stop offset="0.67" stop-color="#0b1020" stop-opacity="0.048"/><stop offset="1" stop-color="#0b1020" stop-opacity="0"/></linearGradient>
+  <radialGradient id="shadow-corner" href="#shadow-edge" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="32"/>
+  <linearGradient id="halo-edge" class="halo-fade" gradientUnits="userSpaceOnUse" x2="52"><stop offset="0" stop-opacity="0.55"/><stop offset="0.25" stop-opacity="0.448"/><stop offset="0.5" stop-opacity="0.248"/><stop offset="0.75" stop-opacity="0.07"/><stop offset="1" stop-opacity="0"/></linearGradient>
+  <radialGradient id="halo-corner" href="#halo-edge" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="52"/>
+  <linearGradient id="cylinder-shade" x1="0" x2="1" y1="0" y2="0">
+    <stop offset="0" stop-color="#ffffff" stop-opacity=".1"/>
+    <stop offset=".45" stop-color="#ffffff" stop-opacity="0"/>
+    <stop offset="1" stop-color="#000000" stop-opacity=".3"/>
+  </linearGradient></defs>
+  <g class="drawing">
+    <g class="ground" shape-rendering="crispEdges" transform="matrix(.866 .5 -.866 .5 0 0)">
+      <g class="halo"><rect class="halo-core" fill-opacity=".55" x="0" y="0" width="160" height="160"/><rect transform="matrix(1 0 0 1 160 0)" width="52" height="160" fill="url(#halo-edge)"/><rect transform="matrix(0 1 1 0 0 160)" width="52" height="160" fill="url(#halo-edge)"/><rect transform="matrix(1 0 0 1 160 160)" width="52" height="52" fill="url(#halo-corner)"/><rect transform="matrix(-1 0 0 1 0 160)" width="52" height="52" fill="url(#halo-corner)"/><rect transform="matrix(1 0 0 -1 160 0)" width="52" height="52" fill="url(#halo-corner)"/><rect transform="matrix(-1 0 0 1 0 0)" width="52" height="160" fill="url(#halo-edge)"/><rect transform="matrix(0 -1 1 0 0 0)" width="52" height="160" fill="url(#halo-edge)"/><rect transform="matrix(-1 0 0 -1 0 0)" width="52" height="52" fill="url(#halo-corner)"/></g>
+      <rect fill="#0b1020" fill-opacity=".2" x="22" y="22" width="132" height="132"/><rect transform="matrix(1 0 0 1 154 22)" width="32" height="132" fill="url(#shadow-edge)"/><rect transform="matrix(0 1 1 0 22 154)" width="32" height="132" fill="url(#shadow-edge)"/><rect transform="matrix(1 0 0 1 154 154)" width="32" height="32" fill="url(#shadow-corner)"/><rect transform="matrix(-1 0 0 1 22 154)" width="32" height="32" fill="url(#shadow-corner)"/><rect transform="matrix(1 0 0 -1 154 22)" width="32" height="32" fill="url(#shadow-corner)"/><rect transform="matrix(-1 0 0 1 22 22)" width="32" height="132" fill="url(#shadow-edge)"/><rect transform="matrix(0 -1 1 0 22 22)" width="32" height="132" fill="url(#shadow-edge)"/><rect transform="matrix(-1 0 0 -1 22 22)" width="32" height="32" fill="url(#shadow-corner)"/>
+    </g>
+    <g class="art">
+      <path d="M-93.59188768161128,-25.331313953619166L-70.01159390208844,84.98852358794203A70.54271999999999 40.728959999999994 0 0 0 70.01159390208844,84.98852358794203L93.59188768161128,-25.331313953619166Z" fill="#252b36"/>
+      <path d="M-78.39803767188899,45.752748033726064A78.99278550595238 45.60773955357143 0 0 0 78.39803767188899,45.752748033726064L77.34534598530313,50.677740781117194A77.93210782738095 44.995340446428564 0 0 1 -77.34534598530313,50.677740781117194ZM-86.25813559839658,8.979468853205667A86.91251217261903 50.18031955357142 0 0 0 86.25813559839658,8.979468853205667L85.20544391181076,13.904461600596791A85.85183449404762 49.56792044642857 0 0 1 -85.20544391181076,13.904461600596791Z" fill="#3b4352" stroke="#0d1015"/>
+      <path d="M-93.59188768161128,-25.331313953619166L-70.01159390208844,84.98852358794203A70.54271999999999 40.728959999999994 0 0 0 70.01159390208844,84.98852358794203L93.59188768161128,-25.331313953619166Z" fill="url(#cylinder-shade)"/>
+      <path class="edge" d="M-93.59188768161128,-25.331313953619166L-70.01159390208844,84.98852358794203A70.54271999999999 40.728959999999994 0 0 0 70.01159390208844,84.98852358794203L93.59188768161128,-25.331313953619166"/>
+      <circle cx="-18.244161997600948" cy="37.75240394839769" r="2.2" class="led blue"/><circle cx="-6.118812207309966" cy="38.70730215433338" r="2.2" class="led status pulse"/><circle cx="6.118812207309966" cy="38.70730215433338" r="2.2" class="led activity" style="--period: 2.4s; --delay: -0.0s"/><circle cx="18.244161997600948" cy="37.75240394839769" r="2.2" class="fault"/>
+      <g transform="translate(0 -112)">
+  <path d="M-97.98400000000001 72V80A97.98400000000001 56.57600000000001 0 0 0 97.98400000000001 80V72Z" fill="#252b36"/>
+  <path d="M-97.98400000000001 72V80A97.98400000000001 56.57600000000001 0 0 0 97.98400000000001 80V72Z" fill="url(#cylinder-shade)"/>
+  <ellipse cx="0" cy="72" rx="97.98400000000001" ry="56.57600000000001" fill="#3b4352"/>
+  <path class="edge" d="M-97.98400000000001 72V80A97.98400000000001 56.57600000000001 0 0 0 97.98400000000001 80V72"/>
+  <ellipse class="edge" cx="0" cy="72" rx="97.98400000000001" ry="56.57600000000001"/>
+        <path d="M-97.98400000000001 76A97.98400000000001 56.57600000000001 0 0 0 97.98400000000001 76" fill="none" stroke="#2dd4bf" stroke-opacity=".6" stroke-width="2"/>
+      </g>
+      <g transform="matrix(.866 .5 -.866 .5 0 -120)">
+        <circle cx="80" cy="80" r="74" fill="none" stroke="#252b36" stroke-width="2"/>
+        
+      </g></g></g>
+</svg>

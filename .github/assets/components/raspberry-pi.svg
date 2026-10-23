@@ -1,0 +1,180 @@
+<!--! isostack 0.1.0 by enixCode | MIT | https://github.com/enixCode/isostack -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-133.28 -80 301.2 244" width="301.2" height="244" data-status="ok" role="img" aria-label="Raspberry Pi, status ok">
+  <style>
+  /* Status goes through inherited variables (--_ prefix: internal): they are the only ones that
+     reach the copies made by use, such as the network ports. */
+  [data-status] {
+    --_color: var(--iso-ok, #22c55e); --_disk: var(--iso-ok, #22c55e); --_disk-anim: activity;
+    --_fault: #3a2d18; --_fault-anim: none;
+  }
+  [data-status="warn"] { --_color: var(--iso-warn, #f59e0b); --_fault: var(--_color); }
+  [data-status="down"] {
+    --_color: var(--iso-down, #ef4444); --_fault: var(--_color); --_fault-anim: pulse;
+    --_disk: #1f2a22; --_disk-anim: none;
+  }
+  /* Unknown: no data, so a grey status light and no disk activity. */
+  [data-status="unknown"] { --_color: var(--iso-unknown, #94a3b8); --_disk: #2b313d; --_disk-anim: none; }
+  /* Cover: the front faces fade out when the box is open, to show the inside. */
+  .cover { transition: opacity .4s; }
+  [data-open] .cover { opacity: .08; }
+  /* Inside: painted only while the box is open, and through the fade that follows closing it (the
+     switch to none waits for the end of the transition, where supported). */
+  .inside { display: none; transition: display .4s allow-discrete; }
+  [data-open] .inside { display: inline; }
+  .inside rect { stroke: #2a303b; vector-effect: non-scaling-stroke; }
+  .floor-grid { fill: none; stroke: #c3cad5; stroke-width: 1; vector-effect: non-scaling-stroke; }
+  /* Front edges fade partly with the cover; the back ones stay sharp. */
+  .edge { fill: none; stroke: #0f1218; stroke-width: 1.5; stroke-linejoin: round; vector-effect: non-scaling-stroke; transition: opacity .4s; }
+  [data-open] .edge { opacity: .35; }
+  /* Status halo on the ground, warn and down only, in the status color. */
+  .halo { display: none; }
+  [data-status="warn"] .halo, [data-status="down"] .halo { display: inline; }
+  .halo-core { fill: var(--_color); }
+  .halo-fade stop { stop-color: var(--_color); }
+  /* Lights glow without a filter: a 2 units wide band around the dot, under its flat core, painted by
+     a radial gradient of its own color (see glow below). */
+  .led, .fault { stroke-width: 4; paint-order: stroke; pointer-events: none; }
+  .led.blue { stroke: url(#glow-blue); }
+  .led.status { stroke: url(#glow-status); }
+  .led.activity { stroke: url(#glow-disk); }
+  .fault { stroke: url(#glow-fault); }
+  .blue { fill: #38bdf8; }
+  .status { fill: var(--_color); }
+  .screw { fill: #11151b; stroke: #4b5467; }
+  .label { font: 700 14px ui-monospace, Consolas, monospace; fill: #1e293b; }
+  /* Animations. A light is lit or dim, never half way, and every change of every light falls on one
+     shared beat of .2 s, so that the browser repaints a few times a second instead of at every frame.
+     --period (a whole number of 2.4 s turns; 0 keeps the light lit) and --delay (whole beats) place a
+     light in the pattern; the element shifts all its lights by --_phase, so that devices of a kind do
+     not blink together. --iso-speed speeds the beat up or down, --iso-animation: paused freezes it. */
+  .activity { fill: var(--_disk); animation: var(--_disk-anim) calc(var(--period, 2.4s) / var(--iso-speed, 1)) calc((var(--delay, 0s) + var(--_phase, 0s)) / var(--iso-speed, 1)) step-end infinite var(--iso-animation, running); }
+  .pulse { animation: pulse calc(2.4s / var(--iso-speed, 1)) calc(var(--_phase, 0s) / var(--iso-speed, 1)) step-end infinite var(--iso-animation, running); }
+  .fault { fill: var(--_fault); animation: var(--_fault-anim) calc(.8s / var(--iso-speed, 1)) step-end infinite var(--iso-animation, running); }
+  @keyframes activity { 0%, 25%, 66.667%, 83.333% { opacity: 1; } 16.667%, 50%, 75% { opacity: .15; } }
+  @keyframes pulse { 0% { opacity: 1; } 50% { opacity: .3; } }
+  /* An animated light is moved to a layer of its own, which would not fade with the cover: the lights of
+     an open cover stand still (the element also keeps them still through the fade that closes it). */
+  [data-open] .cover .activity, [data-open] .cover .pulse, [data-open] .cover .fault { animation: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .activity, .pulse, .fault { animation: none !important; }
+    .cover, .edge, .inside { transition: none; }
+  }
+</style>
+  <defs>
+  <radialGradient id="glow-status" r=".875" style="color: var(--_color)">
+    <stop offset=".571" stop-color="currentColor" stop-opacity=".42"/>
+    <stop offset=".77" stop-color="currentColor" stop-opacity=".18"/>
+    <stop offset="1" stop-color="currentColor" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="glow-disk" r=".875" style="color: var(--_disk)">
+    <stop offset=".571" stop-color="currentColor" stop-opacity=".42"/>
+    <stop offset=".77" stop-color="currentColor" stop-opacity=".18"/>
+    <stop offset="1" stop-color="currentColor" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="glow-fault" r=".875" style="color: var(--_fault)">
+    <stop offset=".571" stop-color="currentColor" stop-opacity=".42"/>
+    <stop offset=".77" stop-color="currentColor" stop-opacity=".18"/>
+    <stop offset="1" stop-color="currentColor" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="glow-blue" r=".875" style="color: #38bdf8">
+    <stop offset=".571" stop-color="currentColor" stop-opacity=".42"/>
+    <stop offset=".77" stop-color="currentColor" stop-opacity=".18"/>
+    <stop offset="1" stop-color="currentColor" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="shadow-edge" gradientUnits="userSpaceOnUse" x2="32"><stop offset="0" stop-color="#0b1020" stop-opacity="0.2"/><stop offset="0.33" stop-color="#0b1020" stop-opacity="0.152"/><stop offset="0.67" stop-color="#0b1020" stop-opacity="0.048"/><stop offset="1" stop-color="#0b1020" stop-opacity="0"/></linearGradient>
+  <radialGradient id="shadow-corner" href="#shadow-edge" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="32"/>
+  <linearGradient id="halo-edge" class="halo-fade" gradientUnits="userSpaceOnUse" x2="52"><stop offset="0" stop-opacity="0.55"/><stop offset="0.25" stop-opacity="0.448"/><stop offset="0.5" stop-opacity="0.248"/><stop offset="0.75" stop-opacity="0.07"/><stop offset="1" stop-opacity="0"/></linearGradient>
+  <radialGradient id="halo-corner" href="#halo-edge" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="52"/>
+  <g id="port">
+    <rect width="10" height="8" rx="1" fill="#0d1015" stroke="#394151"/>
+    <rect x="3" y="3" width="4" height="3" fill="#1b2029"/>
+  </g>
+  <g id="port-leds"><circle cx="2" cy="1.8" r="1"/><circle cx="8" cy="1.8" r="1"/></g></defs>
+  <g class="drawing">
+    <g class="ground" shape-rendering="crispEdges" transform="matrix(.866 .5 -.866 .5 0 0)">
+      <g class="halo"><rect transform="matrix(1 0 0 1 120 0)" width="52" height="80" fill="url(#halo-edge)"/><rect transform="matrix(0 1 1 0 0 80)" width="52" height="120" fill="url(#halo-edge)"/><rect transform="matrix(1 0 0 1 120 80)" width="52" height="52" fill="url(#halo-corner)"/><rect transform="matrix(-1 0 0 1 0 80)" width="52" height="52" fill="url(#halo-corner)"/><rect transform="matrix(1 0 0 -1 120 0)" width="52" height="52" fill="url(#halo-corner)"/><rect transform="matrix(-1 0 0 1 0 0)" width="52" height="80" fill="url(#halo-edge)"/><rect transform="matrix(0 -1 1 0 0 0)" width="52" height="120" fill="url(#halo-edge)"/><rect transform="matrix(-1 0 0 -1 0 0)" width="52" height="52" fill="url(#halo-corner)"/></g>
+      <rect transform="matrix(1 0 0 1 114 22)" width="32" height="52" fill="url(#shadow-edge)"/><rect transform="matrix(0 1 1 0 22 74)" width="32" height="92" fill="url(#shadow-edge)"/><rect transform="matrix(1 0 0 1 114 74)" width="32" height="32" fill="url(#shadow-corner)"/><rect transform="matrix(-1 0 0 1 22 74)" width="32" height="32" fill="url(#shadow-corner)"/><rect transform="matrix(1 0 0 -1 114 22)" width="32" height="32" fill="url(#shadow-corner)"/>
+    </g>
+    <g class="cover">
+      <g transform="matrix(.866 .5 -.866 .5 0 -16)">
+      <rect width="120" height="80" fill="#3a5f4b"/>
+      <path d="M51 39H56M51 44H56M51 49H56M70 40H80L86 34H96M70 45H82L88 39H96M66 53V58L72 64H94M70 50L74 54V60H94M36 55V72M40 55V72M46 55V62L55 70V72" fill="none" stroke="#467259" stroke-width="1.2"/>
+      <circle cx="5" cy="5" r="3.4" fill="#a7b0be"/><circle cx="5" cy="5" r="1.7" fill="#0d1015"/><circle cx="87" cy="5" r="3.4" fill="#a7b0be"/><circle cx="87" cy="5" r="1.7" fill="#0d1015"/><circle cx="5" cy="75" r="3.4" fill="#a7b0be"/><circle cx="5" cy="75" r="1.7" fill="#0d1015"/><circle cx="87" cy="75" r="3.4" fill="#a7b0be"/><circle cx="87" cy="75" r="1.7" fill="#0d1015"/>
+      
+      <circle cx="8" cy="62" r="2.2" class="led status pulse"/>
+  <circle cx="14" cy="62" r="2.2" class="led activity" style="--period: 7.2s; --delay: -1.4s"/></g>
+      <g transform="matrix(.866 .5 0 1 -69.28 24)"><rect width="120" height="16" fill="#2c4a3b"/></g>
+      <g transform="matrix(.866 -.5 0 1 34.64 84)"><rect width="80" height="16" fill="#233c30"/></g>
+    </g>
+    <!-- Visible edges, always drawn. -->
+    <rect class="edge" transform="matrix(.866 .5 -.866 .5 0 -16)" width="120" height="80"/>
+    <rect class="edge" transform="matrix(.866 .5 0 1 -69.28 24)" width="120" height="16"/>
+    <rect class="edge" transform="matrix(.866 -.5 0 1 34.64 84)" width="80" height="16"/>
+    <!-- What sticks out of the box belongs to its cover, and fades with it. -->
+    <g class="cover extra">
+      
+  <g transform="matrix(.866 .5 -.866 .5 7.4475999999999996 -13.8)"><rect width="72" height="7.2" fill="#232831"/></g>
+  <g transform="matrix(.866 .5 0 1 1.2124000000000004 -10.2)"><rect width="72" height="3.5" fill="#161a21"/></g>
+  <g transform="matrix(.866 -.5 0 1 63.564400000000006 25.799999999999997)"><rect width="7.2" height="3.5" fill="#11151b"/></g>
+  <rect class="edge" transform="matrix(.866 .5 -.866 .5 7.4475999999999996 -13.8)" width="72" height="7.2"/>
+  <rect class="edge" transform="matrix(.866 .5 0 1 1.2124000000000004 -10.2)" width="72" height="3.5"/>
+  <rect class="edge" transform="matrix(.866 -.5 0 1 63.564400000000006 25.799999999999997)" width="7.2" height="3.5"/><path transform="matrix(.866 .5 0 1 5.8888 -20.4)" d="M1.15 0h1.3v8h-1.3zM4.75 0h1.3v8h-1.3zM8.35 0h1.3v8h-1.3zM11.95 0h1.3v8h-1.3zM15.55 0h1.3v8h-1.3zM19.15 0h1.3v8h-1.3zM22.75 0h1.3v8h-1.3zM26.35 0h1.3v8h-1.3zM29.95 0h1.3v8h-1.3zM33.55 0h1.3v8h-1.3zM37.15 0h1.3v8h-1.3zM40.75 0h1.3v8h-1.3zM44.35 0h1.3v8h-1.3zM47.95 0h1.3v8h-1.3zM51.55 0h1.3v8h-1.3zM55.15 0h1.3v8h-1.3zM58.75 0h1.3v8h-1.3zM62.35 0h1.3v8h-1.3zM65.95 0h1.3v8h-1.3zM69.55 0h1.3v8h-1.3z" fill="#b4bcc9"/><path transform="matrix(.866 .5 0 1 2.7712000000000003 -18.6)" d="M1.15 0h1.3v8h-1.3zM4.75 0h1.3v8h-1.3zM8.35 0h1.3v8h-1.3zM11.95 0h1.3v8h-1.3zM15.55 0h1.3v8h-1.3zM19.15 0h1.3v8h-1.3zM22.75 0h1.3v8h-1.3zM26.35 0h1.3v8h-1.3zM29.95 0h1.3v8h-1.3zM33.55 0h1.3v8h-1.3zM37.15 0h1.3v8h-1.3zM40.75 0h1.3v8h-1.3zM44.35 0h1.3v8h-1.3zM47.95 0h1.3v8h-1.3zM51.55 0h1.3v8h-1.3zM55.15 0h1.3v8h-1.3zM58.75 0h1.3v8h-1.3zM62.35 0h1.3v8h-1.3zM65.95 0h1.3v8h-1.3zM69.55 0h1.3v8h-1.3z" fill="#b4bcc9"/>
+      
+  <g transform="matrix(.866 .5 -.866 .5 -3.464 13.5)"><rect width="21" height="21" fill="#7c8595"/><rect x="3.5" y="3.5" width="14" height="14" rx="1" fill="none" stroke="#9aa3b2"/></g>
+  <g transform="matrix(.866 .5 0 1 -21.65 24)"><rect width="21" height="2.5" fill="#5b6372"/></g>
+  <g transform="matrix(.866 -.5 0 1 -3.464 34.5)"><rect width="21" height="2.5" fill="#4a515e"/></g>
+  <rect class="edge" transform="matrix(.866 .5 -.866 .5 -3.464 13.5)" width="21" height="21"/>
+  <rect class="edge" transform="matrix(.866 .5 0 1 -21.65 24)" width="21" height="2.5"/>
+  <rect class="edge" transform="matrix(.866 -.5 0 1 -3.464 34.5)" width="21" height="2.5"/>
+      
+  <g transform="matrix(.866 .5 -.866 .5 16.454 28.5)"><rect width="14" height="15" fill="#232831"/><circle cx="3" cy="3" r="1" fill="#4b5467"/></g>
+  <g transform="matrix(.866 .5 0 1 3.464 36)"><rect width="14" height="2" fill="#161a21"/></g>
+  <g transform="matrix(.866 -.5 0 1 15.588 43)"><rect width="15" height="2" fill="#11151b"/></g>
+  <rect class="edge" transform="matrix(.866 .5 -.866 .5 16.454 28.5)" width="14" height="15"/>
+  <rect class="edge" transform="matrix(.866 .5 0 1 3.464 36)" width="14" height="2"/>
+  <rect class="edge" transform="matrix(.866 -.5 0 1 15.588 43)" width="15" height="2"/>
+      
+  <g transform="matrix(.866 .5 -.866 .5 -53.259 20.25)"><rect width="12" height="10" fill="#8a93a2"/></g>
+  <g transform="matrix(.866 .5 0 1 -61.919 25.25)"><rect width="12" height="4.5" fill="#697181"/><rect x="2" y="1.05" width="8" height="2.4" rx="1.2" fill="#0d1015"/></g>
+  <g transform="matrix(.866 -.5 0 1 -51.527 31.25)"><rect width="10" height="4.5" fill="#565d6b"/></g>
+  <rect class="edge" transform="matrix(.866 .5 -.866 .5 -53.259 20.25)" width="12" height="10"/>
+  <rect class="edge" transform="matrix(.866 .5 0 1 -61.919 25.25)" width="12" height="4.5"/>
+  <rect class="edge" transform="matrix(.866 -.5 0 1 -51.527 31.25)" width="10" height="4.5"/>
+  <g transform="matrix(.866 .5 -.866 .5 -35.939 32.25)"><rect width="10" height="8" fill="#8a93a2"/></g>
+  <g transform="matrix(.866 .5 0 1 -42.867 36.25)"><rect width="10" height="4.5" fill="#697181"/><path d="M2 0.95h6l-1 2.6h-4z" fill="#0d1015"/></g>
+  <g transform="matrix(.866 -.5 0 1 -34.207 41.25)"><rect width="8" height="4.5" fill="#565d6b"/></g>
+  <rect class="edge" transform="matrix(.866 .5 -.866 .5 -35.939 32.25)" width="10" height="8"/>
+  <rect class="edge" transform="matrix(.866 .5 0 1 -42.867 36.25)" width="10" height="4.5"/>
+  <rect class="edge" transform="matrix(.866 -.5 0 1 -34.207 41.25)" width="8" height="4.5"/>
+  <g transform="matrix(.866 .5 -.866 .5 -19.485 41.75)"><rect width="10" height="8" fill="#8a93a2"/></g>
+  <g transform="matrix(.866 .5 0 1 -26.413 45.75)"><rect width="10" height="4.5" fill="#697181"/><path d="M2 0.95h6l-1 2.6h-4z" fill="#0d1015"/></g>
+  <g transform="matrix(.866 -.5 0 1 -17.753 50.75)"><rect width="8" height="4.5" fill="#565d6b"/></g>
+  <rect class="edge" transform="matrix(.866 .5 -.866 .5 -19.485 41.75)" width="10" height="8"/>
+  <rect class="edge" transform="matrix(.866 .5 0 1 -26.413 45.75)" width="10" height="4.5"/>
+  <rect class="edge" transform="matrix(.866 -.5 0 1 -17.753 50.75)" width="8" height="4.5"/>
+  <g transform="matrix(.866 .5 -.866 .5 3.031 44.75)"><rect width="10" height="14" fill="#232831"/></g>
+  <g transform="matrix(.866 .5 0 1 -9.093 51.75)"><rect width="10" height="8.5" fill="#161a21"/><circle cx="5" cy="4.25" r="3.4" fill="#2f3644"/><circle cx="5" cy="4.25" r="1.6" fill="#0d1015"/></g>
+  <g transform="matrix(.866 -.5 0 1 -0.433 56.75)"><rect width="14" height="8.5" fill="#11151b"/></g>
+  <rect class="edge" transform="matrix(.866 .5 -.866 .5 3.031 44.75)" width="10" height="14"/>
+  <rect class="edge" transform="matrix(.866 .5 0 1 -9.093 51.75)" width="10" height="8.5"/>
+  <rect class="edge" transform="matrix(.866 -.5 0 1 -0.433 56.75)" width="14" height="8.5"/>
+      
+  <g transform="matrix(.866 .5 -.866 .5 81.404 13)"><rect width="25" height="18.5" fill="#8a93a2"/></g>
+  <g transform="matrix(.866 .5 0 1 65.383 22.25)"><rect width="25" height="22" fill="#697181"/></g>
+  <g transform="matrix(.866 -.5 0 1 87.033 34.75)"><rect width="18.5" height="22" fill="#565d6b"/><rect x="2.5" y="3.75" width="13.5" height="6.5" rx="1" fill="#0d1015"/><rect x="5" y="5.95" width="8.5" height="2" fill="#c3cad5"/><rect x="2.5" y="11.75" width="13.5" height="6.5" rx="1" fill="#0d1015"/><rect x="5" y="13.95" width="8.5" height="2" fill="#c3cad5"/></g>
+  <rect class="edge" transform="matrix(.866 .5 -.866 .5 81.404 13)" width="25" height="18.5"/>
+  <rect class="edge" transform="matrix(.866 .5 0 1 65.383 22.25)" width="25" height="22"/>
+  <rect class="edge" transform="matrix(.866 -.5 0 1 87.033 34.75)" width="18.5" height="22"/>
+  <g transform="matrix(.866 .5 -.866 .5 59.754 25.5)"><rect width="25" height="18.5" fill="#8a93a2"/></g>
+  <g transform="matrix(.866 .5 0 1 43.733 34.75)"><rect width="25" height="22" fill="#697181"/></g>
+  <g transform="matrix(.866 -.5 0 1 65.383 47.25)"><rect width="18.5" height="22" fill="#565d6b"/><rect x="2.5" y="3.75" width="13.5" height="6.5" rx="1" fill="#0d1015"/><rect x="5" y="5.95" width="8.5" height="2" fill="#c3cad5"/><rect x="2.5" y="11.75" width="13.5" height="6.5" rx="1" fill="#0d1015"/><rect x="5" y="13.95" width="8.5" height="2" fill="#c3cad5"/></g>
+  <rect class="edge" transform="matrix(.866 .5 -.866 .5 59.754 25.5)" width="25" height="18.5"/>
+  <rect class="edge" transform="matrix(.866 .5 0 1 43.733 34.75)" width="25" height="22"/>
+  <rect class="edge" transform="matrix(.866 -.5 0 1 65.383 47.25)" width="18.5" height="22"/>
+  <g transform="matrix(.866 .5 -.866 .5 33.774 38.5)"><rect width="30" height="22" fill="#8a93a2"/></g>
+  <g transform="matrix(.866 .5 0 1 14.722 49.5)"><rect width="30" height="19" fill="#697181"/></g>
+  <g transform="matrix(.866 -.5 0 1 40.702 64.5)"><rect width="22" height="19" fill="#565d6b"/><g transform="translate(2 2.3) scale(1.8)"><use href="#port" x="0" y="0"/><use href="#port-leds" x="0" y="0" class="led activity" style="--period: 2.4s; --delay: -0.0s"/></g></g>
+  <rect class="edge" transform="matrix(.866 .5 -.866 .5 33.774 38.5)" width="30" height="22"/>
+  <rect class="edge" transform="matrix(.866 .5 0 1 14.722 49.5)" width="30" height="19"/>
+  <rect class="edge" transform="matrix(.866 -.5 0 1 40.702 64.5)" width="22" height="19"/></g></g>
+</svg>
