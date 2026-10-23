@@ -19,7 +19,6 @@
   },
   "homepage": "https://github.com/enixCode/isostack#readme",
   "bugs": "https://github.com/enixCode/isostack/issues",
-  "private": true,
   "type": "module",
   "main": "./index.js",
   "exports": {
