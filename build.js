@@ -6,10 +6,11 @@
 // - dist/isostack.isopack.json is an icon pack: the default size of every component in every status,
 //   in the collection format that isoAtlas and Isoflow load as is ({ id, name, icons: [...] }).
 // - custom-elements.json describes every tag for editors and docs tools.
-import { mkdirSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
+import { mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import { draw, STATUSES } from './core/draw.js';
 
 const root = new URL('./', import.meta.url);
+const { version } = JSON.parse(readFileSync(new URL('package.json', root)));
 const camel = name => name.replace(/-(\w)/g, (_, c) => c.toUpperCase());
 const names = readdirSync(new URL('components/', root), { withFileTypes: true }).filter(d => d.isDirectory()).map(d => d.name).sort();
 const models = [];
@@ -32,11 +33,13 @@ const pack = {
   description: 'Isometric infrastructure icons in four statuses: ok, warn, down, unknown.',
   icons: [],
 };
+// Each static file is signed on its first line: a legal comment, which SVGO keeps because of the "!".
+const notice = `<!--! isostack ${version} by enixCode | MIT | https://github.com/enixCode/isostack -->\n`;
 let files = 0;
 for (const model of models) {
   for (const [width, depth] of model.sizes) {
     for (const status of STATUSES) {
-      writeFileSync(new URL(`${model.name}-${width}x${depth}-${status}.svg`, dist), draw(model, { width, depth, status }));
+      writeFileSync(new URL(`${model.name}-${width}x${depth}-${status}.svg`, dist), notice + draw(model, { width, depth, status }));
       files++;
     }
   }

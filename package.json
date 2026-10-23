@@ -12,6 +12,7 @@
     "custom-elements"
   ],
   "license": "MIT",
+  "author": "enixCode (https://github.com/enixCode)",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/enixCode/isostack.git"

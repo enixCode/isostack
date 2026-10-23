@@ -196,4 +196,4 @@ Then open `http://localhost:8000/demo/`: the whole family on one grid. Click an 
 
 ## License
 
-MIT
+[MIT](LICENSE)

@@ -21,7 +21,8 @@ const pkg = JSON.parse(readFileSync(join(project, 'package.json'), 'utf8'));
 if (pkg.name !== 'isostack') fail('name must be isostack');
 if (pkg.type !== 'module') fail('type must be module');
 if (!Array.isArray(pkg.sideEffects) || !pkg.sideEffects.includes('./index.js')) fail('sideEffects must list ./index.js');
-for (const field of ['author', 'contributors', 'maintainers']) if (field in pkg) fail(`no ${field} field (anonymity)`);
+for (const field of ['contributors', 'maintainers']) if (field in pkg) fail(`no ${field} field (anonymity)`);
+if (pkg.author !== 'enixCode (https://github.com/enixCode)') fail('author must be the public handle only (anonymity)');
 
 // 2. The package holds exactly the library (core, every component), its README and the built files.
 const components = readdirSync(join(project, 'components'));
